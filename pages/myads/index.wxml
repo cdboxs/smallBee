@@ -1,0 +1,101 @@
+<!--pages/demand/index.wxml 广告-->
+<import src="../wxParse/wxParse.wxml" />
+<view class='demandMenu'>
+  <text bindtap='menuS' data-id="1" class="{{selected==1?'active':''}}">我的广告</text>
+  <text bindtap='menuS' data-id="2" class="{{selected==2?'active':''}}">发布广告</text>
+</view>
+<view class='productList' wx:if="{{selected==1}}">
+  <block wx:for="{{myDemandList}}" wx:key="key">
+    <view class='product'>
+      <view class='plp'>
+        <image wx:if="{{item.thumbnail}}" src='{{APIURL}}/upload/ad/{{item.thumbnail}}' mode="aspectFill"style='width:100%;height:100%;'></image>
+        <image lazy-load="true" wx:else src='../img/nopicsmall-list.jpg' mode="aspectFit" style='width:94px;height:57px;'></image>
+      </view>
+      <view class='pinfo'>
+        <text class='title'>{{item.title}}</text>
+         <view class='address'>
+          <text>{{item.area}}--{{item.weizhi}}</text>
+        </view>
+        <view class='address'>
+          <image src='../img/xqcall.png'></image>
+          <text>{{item.tel}}</text>
+        </view>
+      </view>
+      <view class='operation'>
+        <!-- <text bindtap='goNewsPay' data-demandid='{{item.id}}' data-title="{{item.title}}">置顶</text>-->
+        <text catchtap='del' data-id='{{item.id}}'>删除</text> 
+      </view>
+
+
+    </view>
+  </block>
+</view>
+<!--发布广告  -->
+<form bindsubmit='addAd' class='checkInF' wx:if="{{selected==2}}">
+<view>
+    <label>显示城市：</label>
+    <input wx:if="{{indexShowCity==0&&district==''}}" type='text' name="shopCity" disabled="true" value='{{cityName}}'></input>
+    <input wx:if="{{indexShowCity==0&&cityName&&district}}" type='text' name="shopCity" disabled="true" value='{{cityName}}-{{district}}'></input>
+    <input wx:if="{{indexShowCity==1}}" type='text' name="shopCity" disabled="true" value='{{cityName}}'></input>
+    <input wx:if="{{indexShowCity==2||indexShowCity==3}}" type='text' name="shopCity" disabled="true" value='{{topName}}-{{cityName}}'></input>
+
+  </view>
+  <view>
+    <label>广告名称：</label>
+    <input type='text' name="demandName" data-name="demandName" value="{{demandName}}" placeholder='请输入广告名称' placeholder-class='plh' bindinput='checkName' maxlength='12'></input>
+    <label class='tipx'>*</label>
+  </view>
+  <view>
+    <label>联系电话：</label>
+    <input type='number' name="demandNum" placeholder='请输入联系电话' placeholder-class='plh' maxlength='11'></input>
+    <label class='tipx'>*</label>
+  </view>
+  <view>
+    <label>详细地址：</label>
+    <input type='text' name="address"  data-name="address" value="{{address}}" bindinput='checkaddress' placeholder='请输入详细地址' placeholder-class='plh' maxlength='20'></input>
+    <label class='tipx'>*</label>
+  </view>
+  <view class='selectADshow'>
+    <label>显示区域：商家首页显示</label>
+    <switch bindchange="selectADshow" checked='{{ADShopshow}}' data-ADshowID="1"/>
+  </view>
+    <view class='selectADshow'>
+    <label>显示区域：便民首页显示</label>
+    <switch bindchange="selectADshow" checked='{{ADdemandshow}}' data-ADshowID="2"/>
+  </view>
+  <view>
+    <label>广告介绍：</label>
+    <textarea name="demandInfo"  maxlength='150'  data-name="demandInfo" value="{{demandInfo}}" bindinput='checkdemandInfo' placeholder='广告详细内容' placeholder-class='plh'></textarea>
+    <label class='tipx'>*</label>
+  </view>
+  <view>
+    <label>封面图片：（建议尺寸 750*357px）</label><label class='tipx'>*</label> 
+    <view class='picAdd'>
+      <input type='text' name="fmdemandPic" style='display:none;' value='{{fmdemandPic}}' maxlength='500'></input>
+        <image wx:if="{{fmdemandListPic}}" src='{{APIURL}}/upload/ad/{{fmdemandListPic}}' class='addPic'></image>
+
+      <image src='../img/addPic.png' class='addPic' wx:if="{{onePicShow}}" data-uploadType="1" bindtap='demandPic'></image>
+    </view>
+  </view>
+ 
+  <view>
+    <label>广告图片：（建议尺寸 750*357px）</label>
+    <view class='picAdd'>
+      <input type='text' name="demandPic" style='display:none;' value='{{demandPic}}' maxlength='500'></input>
+      <block wx:for="{{demandListPic.bannerInfo}}" wx:key="key">
+        <image wx:if="{{item.imgs}}" src='{{APIURL}}/upload/ad/{{item.imgs}}' class='addPic'></image>
+      </block>
+      <image wx:if="{{addPicShow}}" src='../img/addPic.png' class='addPic'  data-uploadType="2" bindtap='demandPic'></image>
+    </view>
+  </view>
+  <!-- <view>
+    <checkbox-group bindchange="payStatus">
+      <checkbox value='{{payStatus}}' name="payStatus" checked='{{checked}}'></checkbox>
+      <label>我要付费置顶</label>
+    </checkbox-group>
+  </view> -->
+  <view class='Agreement'>
+    <template is="wxParse" data="{{wxParseData:Agreement.nodes}}" />
+  </view>
+  <button class='checkInSend' form-type='submit'>立即添加</button>
+</form>

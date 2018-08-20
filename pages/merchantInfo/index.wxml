@@ -1,0 +1,82 @@
+<!--pages/merchantInfo/index.wxml-->
+
+<swiper wx:if="{{dataShow==true}}" class='infob' indicator-dots="true" indicator-color="#888" duration="500">
+  <swiper-item wx:for="{{merchantInfo.img}}" wx:key="key"  >
+    <image src='{{APIURL}}/upload/shop/{{item}}' mode='aspectFill' data-current='{{index}}'  bindtap='showPic'></image>
+  </swiper-item>
+</swiper>
+<swiper wx:if="{{dataShow==false}}" class='infob' indicator-dots="true" indicator-color="#888" duration="500">
+  <swiper-item>
+    <image src='../img/nopicsmall.jpg' mode="aspectFit" style='display:block;width:150px;height:150px;'></image>
+  </swiper-item>
+</swiper>
+
+<view wx:if="{{showPics}}" class='showPic' style='width:{{windowWidth}}px;height:{{screenHeight}}px;' bindtap='hidePic'>
+  <swiper wx:if="{{dataShow==true}}"indicator-dots="true" current="{{swiperIndex}}" indicator-color="#888" duration="500" style='width:{{windowWidth}}px;height:{{screenHeight}}px;'>
+    <swiper-item wx:for="{{merchantInfo.img}}" wx:key="key">
+      <image src='{{APIURL}}/upload/shop/{{item}}' mode='aspectFit' style='height:500px;'></image>
+    </swiper-item>
+  </swiper>
+</view>
+
+<view class='merchantTitle'>
+  <image wx:if="{{merchantInfo.logo}}" src='{{APIURL}}/upload/shop/{{merchantInfo.logo}}'></image>
+  <text>{{merchantInfo.name}}</text>
+</view>
+
+<!-- <view class='otherServer'>
+  <text>停车场</text>
+  <text>wifi</text>
+</view> -->
+
+<view class='merchantTA'>
+  <image src='../img/time_h.png' class='time'></image>
+  <text>营业时间：{{merchantInfo.start_time}} 至 {{merchantInfo.stop_time}}</text>
+</view>
+<view class='merchantTA'>
+  <image src='../img/position.png' class='position'></image>
+  <text>店铺地址：{{merchantInfo.address}}</text>
+  <image src='../img/phoneCall.png' class='callPhone' bindtap='phonecall' data-phoneNum='{{merchantInfo.tel}}'></image>
+</view>
+ <view class='activity'>
+    <text class='jjTitle'>优惠活动</text>
+    <view wx:if="{{merchantInfo.promotion_description}}">{{merchantInfo.promotion_description}}</view>
+    <view wx:else>暂无促销活动</view>
+ </view>
+<view class='merchantjj'>
+  <text class='jjTitle'>店铺简介</text>
+  <view class='jjInfo'>
+    {{merchantInfo.description}}
+  </view>
+ 
+  <button class='lyzx' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="showDiscussf">发表评论</button>
+  <!--评论fixed  加点赞-->
+</view>
+
+<view class='mask' wx:if="{{showModal}}" bindtap='hidemask' style='height:{{screenHeight}}px;' catchtouchmove="myCatchTouch"></view>
+<form class='discussform' wx:if="{{showModal}}" bindsubmit="sendDiscuss">
+  <text>发表评论</text>
+  <textarea type="text" name="discussInfo" data-name="discussInfo" value='{{discussInfo}}' placeholder='请发表您的评价' adjust-position="true" cursor-spacing="1000px" bindinput='checkDisInfo'></textarea>
+  <button form-type='submit'>提交</button>
+</form>
+<view style="display:{{discussStust}};">
+  <view class='discuss'>
+    <text class='jjTitle'>最新评价</text>
+  </view>
+  <view class='discussList'>
+    <block wx:for="{{discussList}}" wx:key="key">
+      <view class='discussInfo'>
+        <view>
+          <text>{{item.nickname}}</text>
+          <text>{{item.creat_time}}</text>
+        </view>
+        <view>{{item.content}}</view>
+        <view>
+          <image src="{{item.is_like==0?'../img/good.png':'../img/good_a.png'}}" bindtap='good' data-id='{{item.id}}'></image>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+<view class=''></view>
+<image src='../img/backHome.png' class='backHome' bindtap='backHome'></image>

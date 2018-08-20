@@ -1,0 +1,24 @@
+<!--pages/pay/index.wxml-->
+<form class='pay' bindsubmit='order'>
+   <image src='../img/logo.png'></image> 
+  <view>
+    <input type='text' name="shopName" value='{{title}}' disabled='true'>
+    <image src='../img/shopIcon.png'></image>
+    </input>
+    <input type='text' name="demandID" value='{{demandid}}' style='display:none;' />
+
+
+    <picker bindchange="checkDay" value="{{days[index]}}" range="{{days}}" data-daysNumber='{{days[index]}}' >
+      <input type='number' name="ktimes" value='{{days[index]}}'disabled='true' bindinput="calculation" placeholder='请输入开通天数'> </input>
+       <image src='../img/time.png'></image>
+      <text>天</text>
+    </picker>
+   
+
+    <input type='text' name="payMoney" value='{{money}}' disabled='true' class='sumPrice' placeholder='支付金额'>
+    <image src='../img/moneyIcon.png'></image>
+    <text>元{{discountTip}}</text>
+    </input>
+  </view>
+  <button form-type='submit'>立即下单</button>
+</form>

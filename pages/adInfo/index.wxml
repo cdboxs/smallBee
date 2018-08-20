@@ -1,0 +1,73 @@
+<!--pages/adInfo/index.wxml-->
+<import src="../wxParse/wxParse.wxml"/> 
+
+<swiper class='infob' indicator-dots="true" indicator-color="#888" duration="500">
+  <swiper-item wx:for="{{adinfo.img}}" wx:key="key">
+    <image  src='{{APIURL}}/upload/ad/{{item}}' mode='aspectFill' bindtap='showPic' data-current='{{index}}'></image>
+  </swiper-item>
+</swiper>
+
+<view wx:if="{{showPics}}" class='showPic' style='width:{{windowWidth}}px;height:{{screenHeight}}px;' bindtap='hidePic'>
+ <swiper indicator-dots="true" current="{{swiperIndex}}" indicator-color="#888" duration="500" style='width:{{windowWidth}}px;height:{{screenHeight}}px;'>
+  <swiper-item wx:for="{{adinfo.img}}" wx:key="key">
+    <image  src='{{APIURL}}/upload/ad/{{item}}'  mode='aspectFit' style='height:500px;'></image>
+  </swiper-item>
+</swiper>
+</view>
+
+
+<view class='merchantTitle'>
+  <image wx:if="{{merchantInfo.logo}}" src='{{APIURL}}/upload/shop/{{merchantInfo.logo}}'></image>
+  <text>{{adinfo.title}}</text>
+</view>
+<view class='merchantTA'>
+  <image src='../img/xqcall.png' class='time'></image>
+  <text bindtap='phonecall' data-phonenum='{{adinfo.tel}}'>电话：{{adinfo.tel}}</text>
+  <image src='../img/phoneCall.png' class='callPhone'bindtap='phonecall' data-phonenum='{{adinfo.tel}}'></image>
+</view>
+<view class='merchantTA'>
+  <image src='../img/position.png' class='position'></image>
+  <text>地址：{{adinfo.address}}</text>
+</view>
+<view class='merchantTA'>
+  <image src='../img/time_h.png' class='position'></image>
+  <text>结束时间：{{adinfo.end_time}}</text>
+</view>
+<view class='adDetails'>
+  <template is="wxParse" data="{{wxParseData:article.nodes}}"/> 
+</view>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

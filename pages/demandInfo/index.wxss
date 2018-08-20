@@ -1,0 +1,93 @@
+/* pages/demandInfo/index.wxss */
+page{
+
+}
+.title{
+  width:96%;
+  padding:4% 2%;
+  line-height: 23px;
+  font-size: 38rpx;
+  background:#fff;
+}
+.time{
+  width:96%;
+  padding:2%;
+  color:#888;
+  font-size: 32rpx;
+  background:#fff;
+  border-bottom:1rpx solid #eee;
+}
+.userinfo{
+  width:96%;
+  height:66rpx;
+  padding:2%;
+  font-size: 40rpx;
+  background:#fff;
+  border-bottom:1rpx solid #eee;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.userinfo image{
+  width:64rpx;
+  height:64rpx;
+}
+.demandInfo{
+  width:100%;
+  margin-top:20rpx;
+   background:#fff;
+}
+.demandInfo .jjTitle{
+  width:96%;
+  display: block;
+  font-size: 33rpx;
+  padding:20rpx;
+  border-left:3px solid #ffc72a;
+}
+.demandInfo view{
+  padding:4%;
+}
+.demandPics{
+  display: block;
+  margin:0 auto;
+}
+
+.merchantTA{
+  width: 100%;
+  display: flex;
+  padding:18rpx 0;
+  align-items: center;
+  font-size: 30rpx;
+  background:#fff;
+  position: relative;
+}
+.merchantTA image.time{
+  width:32rpx;
+  height:32rpx;
+  padding:0 5px 0 8px;
+}
+.merchantTA image.position{
+  width:33rpx;
+  height:33rpx;
+   padding:0 5px 0 8px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

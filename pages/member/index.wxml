@@ -1,0 +1,56 @@
+<!--pages/member/index.wxml-->
+<view class='userInfo'>
+  <view class="userAvatarUrl">
+    <image src='{{avatar}}'></image>
+  </view>
+  <view class="userNickName">{{nickname}}</view>
+</view>
+
+<view class='system'>
+   <view bindtap="mymerchant">
+    <image src='../img/merchant.png'></image>
+    <text>我的店铺</text>
+    <image src='../img/more.png'></image>
+  </view>
+  <!--<view bindtap="goPay">
+    <image src='../img/top.png'></image>
+    <text>置顶店铺</text>
+    <image src='../img/more.png'></image>
+  </view> -->
+  <view bindtap="mdemand">
+    <image src='../img/setxq.png'></image>
+    <text>我的便民</text>
+    <image src='../img/more.png'></image>
+  </view>
+   <view bindtap="myads">
+    <image src='../img/ad.png'></image>
+    <text>我的广告</text>
+    <image src='../img/more.png'></image>
+  </view>
+  <view bindtap='about'>
+    <image src='../img/about.png'></image>
+    <text>关于我们</text>
+    <image src='../img/more.png'></image>
+  </view>
+  <view bindtap='feedback'>
+    <image src='../img/feedback.png'></image>
+    <text>投诉建议</text>
+    <image src='../img/more.png'></image>
+  </view>
+</view>
+
+<!--弹框授权  -->
+<view wx:if="{{loginStatus}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="GetUserInfo">
+  <view class='tipMask' style="width:{{screenWidth}}px;height:{{screenHeight}}px;"></view>
+  <view class='tipLogin' style='top:{{(screenHeight-210-100)/2}}px;left:{{(screenWidth-250)/2}}px;'>
+    <view>
+      <image src='../img/logo.png'></image>
+    </view>
+    <view>
+      <text>请登录否则无法操作</text>
+    </view>
+    <view>
+      <button open-type='getUserInfo' bindgetuserinfo='GetUserInfo'>立即登录</button>
+    </view>
+  </view>
+</view>

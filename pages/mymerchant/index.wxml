@@ -1,0 +1,115 @@
+<!--pages/mymerchant/index.wxml我的店铺-->
+<import src="../wxParse/wxParse.wxml" />
+<view class='demandMenu'>
+  <text bindtap='menuS' data-id="1" class="{{selected==1?'active':''}}">我的店铺</text>
+  <text bindtap='menuS' data-id="2" class="{{selected==2?'active':''}}">入驻店铺</text>
+</view>
+<view class='productList mtop' wx:if="{{selected==1}}">
+  <view wx:if="{{noData}}" class='ynData'>o(╥﹏╥)o暂无数据</view>
+  <block wx:for="{{myMerchantList}}" wx:key="key">
+    <view class='product' bindtap='merchantInfo' data-shopid='{{item.id}}'>
+      <view class='plp'>
+        <image lazy-load="true" wx:if="{{item.logo}}" src='{{APIURL}}/upload/shop/{{item.logo}}' mode="widthFix"style='width:100%;height:100%;'></image>
+        <image lazy-load="true" wx:else src='../img/nopicsmall-list.jpg' mode="aspectFit" style='width:94px;height:57px;'></image>
+      </view>
+      <view class='pinfo' style='height:135rpx;'>
+        <text class='title'>{{item.name}}</text>
+        <view class='pother'>
+          <view class='pol'>
+          <text>{{item.class_name}}</text>
+            <!-- <text>{{item.commen_num}}条评论</text> -->
+          </view>
+          <view class='por'>
+            <!-- <text>停车</text> -->
+          </view>
+        </view>
+        <view class='address'>
+          <image src='../img/position.png'></image>
+          <text>{{item.address}}</text>
+        </view>
+      </view>
+      <view class='operation'>
+        
+        <text bindtap='goShopPay' data-shopid='{{item.id}}' data-shop_name="{{item.name}}">置顶</text>
+        <text catchtap='myMerchantSet' data-id='{{item.id}}'>编辑</text>
+        <!-- <image src='../img/del.png' class='del' catchtap='del' data-id='{{item.id}}'></image> -->
+        <text catchtap='del' data-id='{{item.id}}'>删除</text>
+      </view>
+
+    </view>
+
+  </block>
+</view>
+<!--发布需求  -->
+
+
+<form bindsubmit='checkInF' class='checkInF' wx:if="{{selected==2}}">
+  <view>
+    <label>所在城市：</label>
+    <input wx:if="{{indexShowCity==0&&district==''}}" type='text' name="shopCity" disabled="true" value='{{cityName}}'></input>
+    <input wx:if="{{indexShowCity==0&&cityName&&district}}" type='text' name="shopCity" disabled="true" value='{{cityName}}-{{district}}'></input>
+    <input wx:if="{{indexShowCity==1}}" type='text' name="shopCity" disabled="true" value='{{cityName}}'></input>
+    <input wx:if="{{indexShowCity==2||indexShowCity==3}}" type='text' name="shopCity" disabled="true" value='{{topName}}-{{cityName}}'></input>
+
+    <input type='text' name="shopCityID" style='display:none;' value='{{cityID}}'></input>
+  </view>
+  <view>
+    <label>商店名称：</label>
+    <input type='text' name="shopName" placeholder='请输入商家名称' placeholder-class='plh'></input>
+    <label class='tipx'>*</label>
+  </view>
+  <view>
+    <label>商店电话：</label>
+    <input type='number' name="shopPhone" value='' placeholder='请输入商店电话' placeholder-class='plh' maxlength='11'></input>
+    <label class='tipx'>*</label>
+  </view>
+  <view>
+    <label>所属分类：</label>
+    <picker bindchange="selectClassify" value="{{classifyArr[classifyIndex].class_name}}" range="{{classifyArr}}" range-key='class_name'>
+      <input type='text' name="shopClassIfy" disabled="true" value='{{classifyArr[classifyIndex].class_name}}' placeholder='请选择分类' placeholder-class='plh'></input>
+      <input type='text' name="shopClassIfyID" disabled='true' style='display:none;' value="{{classifyArr[classifyIndex].id}}"></input>
+    </picker>
+    <label class='tipx'>*</label>
+  </view>
+
+  <view>
+    <label>详细地址：</label>
+    <input type='text' name="shopAddress" placeholder='请输入详细地址' placeholder-class='plh'></input>
+    <label class='tipx'>*</label>
+  </view>
+  <view class='times'>
+    <label>营业时间：</label>
+    <picker mode="time" value="{{start_time}}" start="00:00" end="23:59" bindchange='start_time'style='width:30%;'>
+      <input type='text' name="start_time" disabled="true" class='start_time' value='{{start_time}}'style='text-align:center;'></input>
+    </picker>
+    <label>至</label>
+    <picker mode="time" value="{{stop_time}}" start="00:00" end="23:59" bindchange='stop_time'style='width:30%;'>
+      <input type='text' name="stop_time" disabled="true" class='stop_time' value='{{stop_time}}'style='text-align:center;'></input>
+    </picker>
+
+  </view>
+  <view>
+    <label>店铺介绍：</label>
+    <textarea name="shopJJ" vlaue="" maxlength='150' placeholder='请输入店铺介绍' placeholder-class='plh'></textarea>
+  </view>
+  <view>
+    <label>店铺实景：（建议尺寸 750*357px）</label>
+    <view class='picAdd'>
+      <input type='hidden' name="shopics" style='display:none;' value='{{shopPicArr}}' maxlength='500'></input>
+      <block wx:for="{{shopListPic.bannerInfo}}" wx:key="key">
+        <image src='{{APIURL}}/upload/shop/{{item.imgs}}' class='addPic'></image>
+      </block>
+      <image wx:if="{{addPicShow}}" src='../img/addPic.png' class='addPic' bindtap='merchantPic'></image>
+    </view>
+  </view>
+  <view>
+    <checkbox-group bindchange="payStatus">
+      <checkbox value='{{payStatus}}' name="payStatus" checked='{{checked}}'></checkbox>
+      <label>我要付费置顶</label>
+    </checkbox-group>
+  </view>
+    <view class='Agreement'>
+  <template is="wxParse" data="{{wxParseData:Agreement.nodes}}" />
+</view>
+  <button class='checkInSend' form-type='submit' disabled="{{sendDisabled}}">立即入驻</button>
+</form>

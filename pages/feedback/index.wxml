@@ -1,0 +1,5 @@
+<!--pages/feedback/index.wxml-->
+<form bindsubmit='feedback' class='feedback'>
+  <textarea name="info" value="{{info}}" bindinput='checkinfo' maxlength='200' placeholder='请填写您的投诉建议，最多200字'></textarea>
+  <button form-type='submit'>提交</button>
+</form>

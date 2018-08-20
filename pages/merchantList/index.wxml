@@ -1,0 +1,76 @@
+<!--pages/merchantList/index.wxml-->
+<view  wx:if="{{loading}}" class='loading' style='width:{{screenWidth}}px;height:{{screenHeight}}px;'>
+  <view>
+    <image src='../img/loading.png' style='width:100px;height:100px;'></image>
+    <text>正在加载中</text>
+  </view>
+</view>
+
+  
+  <view class='dropDown' bindtap='mask'>
+    <text>全部</text>
+    <image src='../img/icon-down.png'></image>
+  </view>
+  <view class='mask' wx:if="{{showMask}}" bindtap='hidemask' style='width:{{screenWidth}}px;height:{{screenHeight}}px;'></view>
+  <view class='dropInfo' wx:if="{{showMask}}" style="width:{{screenWidth}}px;height:250px;">
+    <scroll-view scroll-y="true" style='height:100%;'>
+      <block wx:for="{{Listclassify}}" wx:key="key">
+        <text bindtap='checkClass' data-id='{{item.id}}' style="{{getClassID==item.id ? 'color:#7d330b;':''}}">{{item.class_name}}</text>
+      </block>
+    </scroll-view>
+    <view>
+      <text bindtap='showShopData' data-id='{{getClassID}}'>全部</text>
+    </view>
+  </view>
+
+  <view class='productList mtop'>
+    <view wx:if="{{noData}}" class='ynData'>o(╥﹏╥)o暂无数据</view>
+    <block wx:for="{{moneyShopList}}" wx:key="key" wx:if="{{yesData}}">
+      <view class='product' bindtap='merchantInfo' data-shopid='{{item.id}}'>
+        <view class='plp'>
+           <image lazy-load="true" wx:if="{{item.logo}}" src='{{APIURL}}/upload/shop/{{item.logo}}' mode="widthFix"style='width:100%;height:100%;'></image>
+        <image lazy-load="true" wx:else src='../img/nopicsmall-list.jpg'mode="aspectFit" style='width:100px;height:67px;'></image>
+        </view>
+        <view class='pinfo'>
+          <text class='title'>{{item.name}}</text>
+          <view class='pother'>
+            <view class='pol'>
+              <text>{{item.commen_num}}条评论</text>
+            </view>
+            <view class='por'>
+              <!-- <image src='../img/top.png'></image> -->
+              <text style='color:#ff0000;'>置顶</text> 
+            </view>
+          </view>
+          <view class='address'>
+            <image src='../img/position.png'></image>
+            <text>{{item.address}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    <block wx:for="{{merchantList}}" wx:key="key" wx:if="{{yesData}}">
+      <view class='product' bindtap='merchantInfo' data-shopid='{{item.id}}'>
+        <view class='plp'>
+          <image lazy-load="true" wx:if="{{item.logo}}" src='{{APIURL}}/upload/shop/{{item.logo}}' mode="widthFix"style='width:100%;height:100%;'></image>
+        <image lazy-load="true" wx:else src='../img/nopicsmall-list.jpg' mode="aspectFit" style='width:100px;height:67px;'></image>
+        </view>
+        <view class='pinfo'>
+          <text class='title'>{{item.name}}</text>
+          <view class='pother'>
+            <view class='pol'>
+              <text>{{item.commen_num}}条评论</text>
+            </view>
+            <view class='por'>
+              <!-- <text>停车</text> -->
+            </view>
+          </view>
+          <view class='address'>
+            <image src='../img/position.png'></image>
+            <text>{{item.address}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>   
+  <image src='../img/checkin.png' class='checkIn' bindtap='checkIn' data-classid="{{classId}}" data-classname="{{className}}"></image>   

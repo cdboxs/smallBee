@@ -1,0 +1,46 @@
+<!--pages/demandInfo/index.wxml-->
+
+<view class='title'>{{demandInfo.title}}</view>
+<view class='time'>
+  <text>{{demandInfo.create_time}}</text>
+</view>
+<view class='userinfo'>
+  <text>{{demandInfo.username}}</text>
+  <image src='../img/phoneCall.png' bindtap='call' data-phone='{{demandInfo.tel}}'></image>
+</view>
+<view class='merchantTA'>
+  <image src='../img/position.png' class='position'></image>
+  <text>详细地址：{{demandInfo.address}}</text>
+</view>
+<scroll-view class='demandInfo'>
+  <text class='jjTitle'>详情信息</text>
+  <view>{{demandInfo.content}}</view>
+  <block wx:for="{{demandInfo.img}}" wx:key="key">
+  <image class='demandPics' wx:if="{{item}}" src='{{APIURL}}/upload/news/{{item}}'mode='aspectFill'></image>
+ </block>
+</scroll-view>
+<image src='../img/backHome.png' class='backHome' bindtap='backHome'></image>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

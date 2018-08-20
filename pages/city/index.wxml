@@ -1,0 +1,82 @@
+<!--pages/city/index.wxml-->
+<view class='search'>
+  <view>
+    <image src='../img/search.png'></image>
+  </view>
+  <view>
+    <input type='text' placeholder='输入城市名称' placeholder-class='plh' bindinput="searchCity"></input>
+  </view>
+</view>
+
+<view class='locationCity'>
+  <image src='../img/location.png'></image>
+  <view bindtap='getCity' data-cityid='{{myCityID}}' data-cityName='{{myCityName}}'data-district="{{district}}">
+  定位城市：<text>{{myCityName}}</text><text wx:if="{{district}}">-{{district}}</text>
+  </view>
+</view>
+
+<view class='cityList' wx:if="{{cityStatus==1 && showSearch==true}}">
+  <view>
+    <text>结果</text>
+    <text bindtap='getCity' data-status="1" data-cityid='{{sCityID}}' data-cityName='{{sCityName}}'>{{sCityName}}</text>
+  </view>
+</view>
+<view class='cityList' wx:elif="{{cityStatus==2 && showSearch==true}}">
+  <view>
+    <text>结果</text>
+    <text style='color:#7d330b;font-size:32rpx;'>{{topCity}}</text>
+    <block wx:for="{{sCityName}}" wx:key="key">
+      <text bindtap='getCity' data-status="2" data-topName="{{topCity}}" data-cityid='{{item.id}}' data-cityName='{{item.name}}'>{{item.name}}</text>
+    </block>
+  </view>
+</view>
+<view class='cityList' wx:elif="{{cityStatus==3 && showSearch==true}}">
+  <view>
+    <text>结果</text>
+    <block wx:for="{{sCityName}}" wx:key="key">
+      <text bindtap='getCity' data-status="3" data-topName="{{item.name}}" data-cityid='{{item.fid}}' data-cityName='{{item.fname}}'>{{item.name}}-{{item.fname}}</text>
+    </block>
+  </view>
+</view>
+<view class='cityList' wx:elif="{{cityStatus==0 && showSearch==true}}">
+  <view>
+    <text>结果</text>
+    <text>{{sCityName}}</text>
+  </view>
+</view>
+
+
+<view class='cityList'>
+  <block wx:for="{{cityLetter}}" wx:key="key" wx:for-item="Letter">
+    <view>
+      <text class='cityKey'>{{Letter}}</text>
+      <block wx:for="{{cityArrInArr}}" wx:key="key" wx:for-index="index">
+         <view wx:if="{{item.key==Letter}}">
+          <text class='cityName' wx:if="{{item.data.length>0}}" bindtap="" data-cityid='{{item.id}}' data-cityName='{{item.name}}'>{{item.name}}</text>
+          <text class='cityName' wx:else bindtap="getRegion" data-cityid='{{item.id}}' data-cityName='{{item.name}}'>{{item.name}}</text>
+          <text class='region' wx:for="{{item.data}}" wx:key="key" wx:for-item="region"bindtap="getRegion"data-cityName='{{item.name}}' data-cityid='{{region.id}}'data-districtid='{{region.id}}' data-districtName='{{region.name}}'>
+          
+            {{region.name}}
+          </text>
+        </view> 
+      </block>
+    </view>
+  </block>
+</view>
+
+<!-- 
+<view class='cityList'>
+  <block wx:for="{{cityLetter}}" wx:key="key" wx:for-item="Letter">
+    <view>
+      <text>{{Letter}}</text>
+      <block wx:for="{{cityArr}}" wx:key="key" wx:for-index="index">
+        <view wx:if="{{item[0].key==Letter}}">
+          <text class='cityName' wx:for="{{arrCityKeys[index]}}" wx:key="key" wx:for-item="objkeys" bindtap="getRegion" data-cityid='{{item[objkeys].id}}' data-cityName='{{item[objkeys].name}}'>{{item[objkeys].name}}</text>
+          <text class='region' wx:for="{{item.data}}" wx:for-item="region" wx:key="keys" bindtap="getRegion" data-cityid='{{item[0].id}}' data-cityName='{{item[0].name}}' data-districtid='{{region.id}}' data-districtName='{{region.name}}'>
+              {{region.name}}
+           </text>
+        </view>
+      </block>
+    </view>
+  </block>
+</view> -->

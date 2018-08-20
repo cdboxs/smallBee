@@ -1,0 +1,210 @@
+/* pages/merchantInfo/index.wxss */
+.infob{
+  background:#fff;
+  overflow: hidden;
+  height: 430rpx;
+}
+.infob swiper-item{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.infob image{
+  width:100%;
+}
+.merchantTitle{
+  width:100%;
+  padding:20rpx 25rpx;
+  background:#fff;
+  font-weight: 300;
+  font-size: 33rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.merchantTitle image{
+  width:130rpx;
+  height: 130rpx;
+  border-radius:50%;
+  margin:0 20rpx;
+  position: relative;top:-30rpx;
+}
+.otherServer{
+  width:100%;
+  padding-bottom:20rpx;
+  background: #fff;
+  display: flex;
+  align-items: center;
+}
+.otherServer text{
+  color: #7d330b;
+  font-size: 28rpx;
+  padding: 5rpx 20rpx;
+  margin: 0 10rpx;
+  border-radius: 20rpx;
+  background: #fafafa;
+}
+
+.merchantTA{
+  width: 100%;
+  display: flex;
+  padding:18rpx 0;
+  align-items: center;
+  font-size: 30rpx;
+  background:#fff;
+  position: relative;
+}
+.merchantTA image.time{
+  width:32rpx;
+  height:32rpx;
+  padding:0 5px 0 8px;
+}
+.merchantTA image.position{
+  width:33rpx;
+  height:33rpx;
+   padding:0 5px 0 8px;
+}
+.merchantTA text:nth-of-type(1){
+  display: block;
+  width:73%;
+  margin-right:2%;
+}
+.merchantTA .callPhone{
+  display: block;
+  width:64rpx;
+  height:64rpx;
+  position: absolute;top:0;right:2%;
+}
+.merchantjj,.activity{
+  width: 94%;
+  overflow: hidden;
+  margin:20rpx auto;
+  background:#fff;
+  padding:3%;
+}
+.activity view{
+  font-size: 30rpx;
+  margin-top:20rpx;
+  padding-top:20rpx;
+  border-top:1rpx solid #eee;
+}
+.merchantjj .jjTitle,.activity .jjTitle{
+  width:100%;
+  display: block;
+  font-size: 30rpx;
+  padding-left:20rpx;
+  border-left:3px solid #ffc72a;
+}
+.merchantjj .jjInfo{
+  margin-top:3%;
+  padding-top:20rpx;
+border-top:1rpx solid #eee;
+}
+.merchantjj .lyzx{
+  width:60%;
+  height: 70rpx;
+  line-height: 70rpx;
+  color:#fff;
+  text-align: center;
+  margin:30rpx auto 0;
+  border-radius: 20px;
+  background:#ffc72a;
+  border:none;
+}
+
+.discuss{
+  width: 94%;
+  overflow: hidden;
+  margin:20rpx auto;
+  background:#fff;
+  padding:3%;
+}
+.discuss .jjTitle{
+  width:100%;
+  display: block;
+  font-size: 30rpx;
+  padding-left:20rpx;
+  border-left:3px solid #ffc72a;
+}
+.discussform{
+  display: block;
+  width:100%;
+  background:#fff;
+  overflow: hidden;
+  position: fixed;bottom:0;left:0;z-index: 99999;
+}
+ .discussform text{
+  display: block;
+  width:100%;
+  font-size: 33rpx;
+  text-align: center;
+  padding:20rpx 0;
+} 
+.discussform textarea{
+  width:86%;
+  height: 200rpx;
+  font-size: 30rpx;
+  padding:2%;
+  margin:15rpx auto 36rpx;
+  border:1px solid #eee;
+}
+.discussform button{
+  width: 90%;
+  color:#fff;
+  margin:10rpx auto;
+  background: #ffc72a;
+}
+
+.discussList{
+  width:100%;
+  overflow: hidden;
+  background:#fff;
+}
+.discussList .discussInfo{
+  width:92%;
+  margin:0 auto;
+  padding:4% 4% 1% 4%;
+  border-bottom: 1rpx solid #eee;
+}
+.discussList .discussInfo view:nth-of-type(1){
+  display: flex;
+  font-size: 30rpx;
+  justify-content: space-between;
+}
+.discussList .discussInfo view:nth-of-type(2){
+ padding:2% 0 0 0;
+ color:#222;
+ font-size: 32rpx;
+}
+.discussList .discussInfo view:nth-of-type(3){
+overflow: hidden;
+}
+.discussList .discussInfo view:nth-of-type(3) image{
+width:64rpx;
+height:64rpx;
+float: right;
+}
+
+.showPic{
+  background:#333;
+  position: fixed;top:0;left:0;z-index:99999;
+  display: flex;
+  align-items: center;
+}
+.showPic image{
+  display:block;
+  width:100%;
+  margin:0 auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+

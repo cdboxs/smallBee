@@ -1,0 +1,110 @@
+/**index.wxss**/
+
+.headerTop {
+  width: 100%;
+  height: 86rpx;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.headerTop image {
+  display: block;
+  width: 35rpx;
+  height: 35rpx;
+  margin:0 10rpx;
+}
+
+.headerTop text {
+  color: #666;
+  font-size: 26rpx;
+}
+
+.menu {
+  width: 100%;
+  height: 158px;
+  background: #fff;
+  overflow: hidden;
+  margin-bottom: 15rpx;
+}
+
+.menu swiper-item {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+.menu view {
+  width: 20%;
+  margin: 10rpx 0 0rpx 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu text {
+  display: block;
+  width: 100%;
+  color: #333;
+  padding: 5rpx 0;
+  font-size: 29rpx;
+  text-align: center;
+}
+
+.menu image {
+  display: block;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+
+
+.tt {
+  width: 100%;
+  padding:20rpx 0;
+  margin: 15rpx 0;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tt image:nth-of-type(1) {
+  width: 74rpx;
+  height: 65rpx;
+  padding:0 10rpx;
+}
+
+.tt view {
+  width: 86%;
+  text-align: left;
+  color: #333;
+  font-size: 33rpx;
+  padding: 5rpx 0;
+}
+
+
+.tt image:nth-of-type(2) {
+  width: 128rpx;
+  height: 128rpx;
+}
+.productList{
+  width: 100%;
+background:#fff;
+}
+.ynData{
+  width:100%;
+  margin:100rpx 0;
+  text-align: center;
+  font-size: 35rpx;
+  color:#363636;
+}
+.noData{
+  width:100%;
+  height:200rpx;
+  line-height: 200rpx;
+  text-align: center;
+}

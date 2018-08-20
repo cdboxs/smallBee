@@ -1,0 +1,39 @@
+/* pages/notice/index.wxss */
+page{
+  background:#fff;
+}
+.notice{
+  width:96%;
+  margin:0 auto;
+  padding:2%;
+}
+.notice text{
+  display: block;
+  padding: 2%;
+}
+.noticeTitle{
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.noticeTime{
+  color:#999;
+  font-size: 28rpx;
+}
+.info{
+  color:#222;
+  font-size: 32rpx;
+  line-height: 22px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,158 @@
+<!--index.wxml-->
+<view wx:if="{{loading}}" class='loading' style='width:{{screenWidth}}px;height:{{screenHeight}}px;'>
+  <view>
+    <image src='../img/loading.png' style='width:100px;height:100px;'></image>
+    <text>正在加载中</text>
+  </view>
+</view>
+
+
+<scroll-view style="overflow:{{hidden}};">
+  <view class='headerTop' wx:if="{{indexShowCity==0}}" bindtap='goCity'>
+    <image src='../img/position.png'></image>
+    <view>
+      <text>{{cityName}}</text>
+      <text wx:if="{{district}}">-{{district}}</text>
+    </view>
+  </view>
+  <view class='headerTop' wx:if="{{topName=='' && indexShowCity==1}}" bindtap='goCity'>
+    <image src='../img/position.png'></image>
+    <view>
+      <text wx:if="{{cityName}}">{{cityName}}</text>
+    </view>
+  </view>
+  <view class='headerTop' wx:if="{{topName && indexShowCity==2}}" bindtap='goCity'>
+    <image src='../img/position.png'></image>
+    <view>
+      <text>{{topName}}</text>
+      <text>-{{cityName}}</text>
+    </view>
+  </view>
+  <view class='headerTop' wx:if="{{topName && indexShowCity==3}}" bindtap='goCity'>
+    <image src='../img/position.png'></image>
+    <view>
+      <text>{{topName}}</text>
+      <text>-{{cityName}}</text>
+    </view>
+  </view>
+
+
+  <swiper class='menu' indicator-dots="true" indicator-color="#888" duration="500">
+    <swiper-item>
+      <block wx:for="{{classifyStart}}" wx:key="key">
+        <view bindtap='merchantList' data-classifid='{{item.id}}' data-classname="{{item.class_name}}">
+          <image wx:if="{{item.thumbnail}}" src='{{APIURL}}/upload/{{item.thumbnail}}'></image>
+
+          <text>{{item.class_name}}</text>
+        </view>
+      </block>
+    </swiper-item>
+    <swiper-item>
+      <block wx:for="{{classifyEnd}}" wx:key="key">
+        <view bindtap='merchantList' data-classifid='{{item.id}}' data-classname="{{item.class_name}}">
+          <image wx:if="{{item.thumbnail}}" src='{{APIURL}}/upload/{{item.thumbnail}}'></image>
+          <text>{{item.class_name}}</text>
+        </view>
+      </block>
+    </swiper-item>
+  </swiper>
+  <!--公告-->
+  <view class='tt'>
+    <image src='../img/tt.png'></image>
+    <view bindtap='notice' data-id='{{Notice.id}}'>
+      {{Notice.title}}
+    </view>
+  </view>
+  <!--广告  -->
+  <view class='ad' wx:if="{{adlistStatus==1}}">
+    <block wx:for="{{adlist}}" wx:key="key">
+      <view wx:if="{{item.id!=0}}" data-id='{{item.id}}' bindtap='adinfo'>
+        <image src='{{APIURL}}/upload/ad/{{item.thumbnail}}' mode="aspectFill" style='width:100%;height:100%;'></image>
+      </view>
+      <view wx:else>
+        <image src='../img/ggzs.png'></image>
+      </view>
+    </block>
+  </view>
+  <view class='ad' wx:if="{{adlistStatus==0}}">
+    <view>
+      <image src='../img/ggzs.png'></image>
+    </view>
+    <view>
+      <image src='../img/ggzs.png'></image>
+    </view>
+  </view>
+
+  <view class='switch'>
+    <view class="{{currentTab==0?'switchActive':''}}" bindtap='switchClick' data-currentTab="0">推荐商家</view>
+    <view class="{{currentTab==1?'switchActive':''}}" bindtap='switchClick' data-currentTab="1">正在促销</view>
+  </view>
+  <swiper bindchange="switchToch" current="{{currentTab}}"style="height:{{xqHeight}}px;">
+    <swiper-item>
+      <view class='productList'>
+        <view wx:if="{{noData}}" class='ynData'>o(╥﹏╥)o暂无数据</view>
+        <block wx:for="{{merchantList}}" wx:key="key" wx:if="{{yesData}}">
+          <view class='product' bindtap='merchantInfo' data-shopid='{{item.id}}'>
+            <view class='plp'>
+              <image wx:if="{{item.logo}}" src='{{APIURL}}/upload/shop/{{item.logo}}' mode="widthFix" style='width:100%;height:100%;'></image>
+              <image lazy-load="true" wx:else src='../img/nopicsmall-list.jpg' mode="aspectFit" style='width:100px;height:67px;'></image>
+            </view>
+            <view class='pinfo'>
+              <text class='title'>{{item.name}}</text>
+              <view class='pother'>
+                <view class='pol'>
+                  <text>{{item.class_name}}</text>
+                  <text>{{item.commen_num}}条评论</text>
+                </view>
+                <view class='por'>
+                  <!-- <image src='../img/top.png'></image> -->
+                  <!-- <text>置顶</text>     -->
+                </view>
+              </view>
+              <view class='address'>
+                <image src='../img/position.png'></image>
+                <text>{{item.address}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </swiper-item>
+    <swiper-item>
+          <view class='productList'>
+            <view wx:if="{{noData}}" class='ynData'>o(╥﹏╥)o暂无数据</view>
+            <block wx:for="{{ActivityList}}" wx:key="key" wx:if="{{yesData}}">
+              <view class='product' bindtap='merchantInfo' data-shopid='{{item.id}}'>
+                <view class='plp'>
+                  <image wx:if="{{item.logo}}" src='{{APIURL}}/upload/shop/{{item.logo}}' mode="widthFix" style='width:100%;height:100%;'></image>
+                  <image lazy-load="true" wx:else src='../img/nopicsmall-list.jpg' mode="aspectFit" style='width:100px;height:67px;'></image>
+                </view>
+                <view class='pinfo'>
+                  <text class='title'>{{item.name}}</text>
+                  <view class='pother'>
+                    <view class='pol'>
+                      <text>{{item.class_name}}</text>
+                      <text>{{item.commen_num}}条评论</text>
+                    </view>
+                    <view class='por'>
+                      <!-- <image src='../img/top.png'></image> -->
+                      <!-- <text>置顶</text>     -->
+                    </view>
+                  </view>
+                  <view class='address'>
+                    <image src='../img/position.png'></image>
+                    <text>{{item.address}}</text>
+                  </view>
+                </view>
+              </view>
+            </block>
+          </view>
+    </swiper-item>
+  </swiper>
+
+
+
+
+
+  <image src='../img/checkin.png' class='checkIn' bindtap='checkIn' wx:if="{{isCheckIn}}"></image>
+</scroll-view>

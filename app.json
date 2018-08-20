@@ -1,0 +1,63 @@
+{
+  "pages": [
+    
+    "pages/index/index",
+    "pages/merchantList/index",
+    "pages/merchantInfo/index",
+    "pages/city/index",
+    "pages/checkIn/index",
+    "pages/mdemand/index",
+    "pages/member/index",
+    "pages/merchantSet/index",
+    "pages/notice/index",
+    "pages/demand/index",
+    "pages/demandList/index",
+    "pages/demandInfo/index",
+    "pages/demandPay/index",
+    "pages/about/index",
+    "pages/pay/index",
+    "pages/adPay/index",
+    "pages/adInfo/index",
+    "pages/mymerchant/index",
+    "pages/adInfo2/index",
+    "pages/feedback/index",
+    "pages/myads/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffc72a",
+    "navigationBarTitleText": "小蜜蜂生活自助网",
+    "navigationBarTextStyle": "#fff"
+  },
+  "tabBar": {
+    "color": "#707070",
+    "selectedColor": "#ffc72a",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "商家",
+        "iconPath": "pages/img/shop.png",
+        "selectedIconPath": "pages/img/shop_a.png"
+      },
+      {
+        "pagePath": "pages/demand/index",
+        "text": "便民",
+        "iconPath": "pages/img/xq.png",
+        "selectedIconPath": "pages/img/xq_a.png"
+      },
+      {
+        "pagePath": "pages/member/index",
+        "text": "我的",
+        "iconPath": "pages/img/my.png",
+        "selectedIconPath": "pages/img/my_a.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  }
+}

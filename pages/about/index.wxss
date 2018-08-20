@@ -1,0 +1,12 @@
+/* pages/about/index.wxss */
+page{
+  background:#fff;
+}
+.info{
+  width:92%;
+  padding:4%;
+  color:#222;
+  font-size: 32rpx;
+  line-height: 22px;
+  
+}

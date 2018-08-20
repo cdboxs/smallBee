@@ -1,0 +1,33 @@
+<!--pages/adInfo2/index.wxml-->
+<!--pages/checkIn/index.wxml-->
+<import src="../wxParse/wxParse.wxml" />
+<view class='checkInF'>
+
+  <view>
+    <label>广告名称：</label>
+    <input type='text' value="{{adinfo.title}}" disabled='true'></input>
+  </view>
+  <view>
+    <label>联系电话：</label>
+    <input type='number' bindtap='phonecall' data-phonenum='{{adinfo.tel}}'value='{{adinfo.tel}}' disabled='true'></input>
+    <label class='tipx'><image src='../img/phoneCall.png' class='callPhone'bindtap='phonecall' data-phonenum='{{adinfo.tel}}'></image></label>
+  </view>
+  <view>
+    <label>广告地址：</label>
+    <input type='text' value="{{adinfo.address}}" disabled='true'></input>
+  </view>
+  <view>
+    <label>到期时间：</label>
+    <input type='text' value="{{adinfo.end_time}}" disabled='true'></input>
+  </view>
+
+  <view class='adinfo2'>
+    <label>广告介绍：</label>
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+      <block wx:for="{{adinfo.img}}" wx:key="key">
+        <image src='{{APIURL}}/upload/ad/{{item}}' mode='widthFix'></image>
+      </block>
+  </view>
+  
+
+</view>

@@ -1,0 +1,102 @@
+/* pages/adInfo/index.wxss */
+page{
+  background:#f8f8f8;
+}
+.infob image{
+  width:100%;
+}
+.merchantTitle{
+  width:100%;
+  margin:0 auto 10rpx;
+  padding:20rpx 25rpx;
+  background:#fff;
+  font-weight: 300;
+  font-size: 33rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.merchantTitle image{
+  width:130rpx;
+  height: 130rpx;
+  border-radius:50%;
+  margin:0 20rpx;
+  position: relative;top:-30rpx;
+}
+.merchantTA{
+  width: 100%;
+  display: flex;
+  padding:18rpx 0;
+  align-items: flex-start;
+  font-size: 30rpx;
+  background:#fff;
+  position: relative;
+}
+.merchantTA image.time{
+  width:32rpx;
+  height:32rpx;
+  padding:0 5px 0 8px;
+}
+.merchantTA image.position{
+  width:33rpx;
+  height:33rpx;
+   padding:0 5px 0 8px;
+}
+.merchantTA text:nth-of-type(1){
+  display: block;
+  width:73%;
+  margin-right:2%;
+}
+.merchantTA .callPhone{
+  display: block;
+  width:48rpx;
+  height:48rpx;
+  position: absolute;top:2%;right:2%;
+}
+.adDetails{
+  width:100%;
+  padding:15rpx;
+  font-size: 30rpx;
+  background:#fff;
+  margin-top:10rpx;
+  box-sizing: border-box;
+}
+.showPic{
+  background:#333;
+  position: fixed;top:0;left:0;z-index:99999;
+  display: flex;
+  align-items: center;
+}
+.showPic image{
+  display:block;
+  width:100%;
+  margin:0 auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
