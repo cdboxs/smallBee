@@ -47,6 +47,7 @@
   <text class='jjTitle'>店铺简介</text>
   <view class='jjInfo'>
     {{merchantInfo.description}}
+    <image wx:for="{{merchantInfo.img}}" wx:key="key"  src='{{APIURL}}/upload/shop/{{item}}' mode='aspectFill'></image>
   </view>
  
   <button class='lyzx' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="showDiscussf">发表评论</button>
@@ -70,7 +71,9 @@
           <text>{{item.nickname}}</text>
           <text>{{item.creat_time}}</text>
         </view>
-        <view>{{item.content}}</view>
+        <view>
+        {{item.content}}
+        </view>
         <view>
           <image src="{{item.is_like==0?'../img/good.png':'../img/good_a.png'}}" bindtap='good' data-id='{{item.id}}'></image>
         </view>
@@ -78,5 +81,8 @@
     </block>
   </view>
 </view>
-<view class=''></view>
+<view class='support'>
+  <text>——《小蜜蜂生活自助网》-提供技术支持——</text>
+  <text>15369021786</text>
+</view>
 <image src='../img/backHome.png' class='backHome' bindtap='backHome'></image>

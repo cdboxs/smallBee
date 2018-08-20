@@ -48,6 +48,13 @@
     </picker>
     <label class='tipx'>*</label>
   </view>
+  <view class='selectADshow'>
+    <label>添加活动：</label>
+    <switch bindchange="selectActivity" checked='{{activityShow}}' />
+  </view>
+  <view wx:if="{{activityShow}}">
+    <textarea name="activityInfo" vlaue="" maxlength='150' placeholder='请输入活动介绍' placeholder-class='plh'></textarea>
+  </view>
   <view>
     <label>店铺介绍：</label>
     <textarea name="shopJJ" maxlength='150' placeholder="{{description?'':'请输入店铺介绍'}}" value="{{description}}" placeholder-class='plh'></textarea>

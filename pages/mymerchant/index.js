@@ -25,7 +25,20 @@ Page({
     scrollHeight: app.globalData.screenHeight,
     APIURL: app.globalData.APIURL
   },
-
+  selectActivity: function (e) {
+    var that = this;
+    if (e.detail.value) {
+      that.setData({
+        activityShow: true,
+        activityType: 1
+      });
+    } else {
+      that.setData({
+        activityShow: false,
+        activityType: 0
+      });
+    }
+  },
   /**
    * 入驻获取分类
    * */
@@ -81,7 +94,7 @@ Page({
     var that = this;
 
     wx.chooseImage({
-      count: 4,  //最多可以选择的图片总数  
+      count: 6,  //最多可以选择的图片总数  
       sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有  
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有  
       success: function (res) {
@@ -123,7 +136,7 @@ Page({
                   shopPicArr: arrJson
                 });
               }
-              if (arr.length >= 4) {
+              if (arr.length >= 6) {
                 that.setData({
                   addPicShow: false
                 });
@@ -279,6 +292,8 @@ Page({
                 stop_time: e.detail.value.stop_time,//结束时间
                 description: e.detail.value.shopJJ,//介绍
                 img: e.detail.value.shopics,//实景图
+                type: that.data.activityType,//活动状态
+                promotion_description: e.detail.value.activityInfo,//活动内容
                 status: 0
               },
               success: function (o) {
@@ -333,6 +348,8 @@ Page({
                 stop_time: e.detail.value.stop_time,//结束时间
                 description: e.detail.value.shopJJ,//介绍
                 img: e.detail.value.shopics,//实景图
+                type: that.data.activityType,//活动状态
+                promotion_description: e.detail.value.activityInfo,//活动内容
                 status: 1
               },
               success: function (o) {

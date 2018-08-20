@@ -70,16 +70,16 @@
         <image src='{{APIURL}}/upload/ad/{{item.thumbnail}}' mode="aspectFill" style='width:100%;height:100%;'></image>
       </view>
       <view wx:else>
-        <image src='../img/ggzs.png'></image>
+        <image src='http://www.xiaomifenglife.com/upload/ad/20180819/ad.jpg'></image>
       </view>
     </block>
   </view>
   <view class='ad' wx:if="{{adlistStatus==0}}">
     <view>
-      <image src='../img/ggzs.png'></image>
+      <image src='http://www.xiaomifenglife.com/upload/ad/20180819/ad.jpg'></image>
     </view>
     <view>
-      <image src='../img/ggzs.png'></image>
+      <image src='http://www.xiaomifenglife.com/upload/ad/20180819/ad.jpg'></image>
     </view>
   </view>
 

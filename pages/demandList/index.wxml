@@ -7,7 +7,7 @@
 </view>
 
   
-  <view class='dropDown' bindtap='mask'>
+  <!-- <view class='dropDown' bindtap='mask'>
     <text>全部</text>
     <image src='../img/icon-down.png'></image>
   </view>
@@ -21,7 +21,18 @@
     <view>
       <text bindtap='showShopData' data-id='{{getClassID}}'>全部</text>
     </view>
+  </view> -->
+<view class='dropDown' bindtap='mask'>
+    <text>选择分类</text>
+    <image src='../img/icon-down.png'></image>
   </view>
+  <view class='mask' wx:if="{{showMask}}" bindtap='hidemask' style='height:{{screenHeight}}px;'></view>
+  <view class='dropInfo' wx:if="{{showMask}}" style="width:{{screenWidth}}px;">
+      <block wx:for="{{Listclassify}}" wx:key="key">
+        <text bindtap='checkClass' data-id='{{item.id}}' style="{{getClassID==item.id ? 'color:#7d330b;':''}}">{{item.class_name}}</text>
+      </block>
+  </view>
+
 
   <view class='productList mtop'>
     <view wx:if="{{noData}}" class='ynData'>o(╥﹏╥)o暂无数据</view>
