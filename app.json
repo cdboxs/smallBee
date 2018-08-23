@@ -1,6 +1,6 @@
 {
   "pages": [
-    
+    "pages/myads/index",
     "pages/index/index",
     "pages/merchantList/index",
     "pages/merchantInfo/index",
@@ -21,7 +21,7 @@
     "pages/mymerchant/index",
     "pages/adInfo2/index",
     "pages/feedback/index",
-    "pages/myads/index"
+    "pages/myAdU/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
