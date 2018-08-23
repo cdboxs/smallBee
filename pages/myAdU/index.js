@@ -100,11 +100,7 @@ Page({
               }
               that.getAdInfo();
               wx.hideLoading();
-              // that.setData({
-              //   fmdemandListPic: e.data,
-              //   fmdemandPic: e.data,
-              //   onePicShow: false
-              // });
+             
             },
             fail: function (res) {
               wx.hideToast();
@@ -196,16 +192,18 @@ Page({
         icon: 'none',
         mask: true
       })
+      console.log(that.data.adid);
       wx.getStorage({
         key: 'loginStatus',
         success: function (res) {
           wx.request({
-            url: app.globalData.APIURL + '/api/ad/add',
+            url: app.globalData.APIURL + '/api/ad/upd',
             method: 'POST',
             header: {
               'content-type': 'application/json'
             },
             data: {
+              id: that.data.adid,
               title: e.detail.value.demandName,
               tel: e.detail.value.demandNum,
               content: e.detail.value.demandInfo,
@@ -213,20 +211,19 @@ Page({
               uid: res.data.userID,
               area_id: cityInfo.cityID,
               thumbnail: e.detail.value.fmdemandPic,
-              img: e.detail.value.demandPic,
               the_where: that.data.adshowid //广告位置 1 商家页 2 便民页
 
             },
             success: function (res) {
               console.log(res);
-
+              wx.hideLoading();
               if (res.data.code == 1) {
                 setTimeout(function () {
                   wx.hideLoading();
                   wx.navigateTo({
                     url: '../adPay/index?adid=' + res.data.data + '&title=' + e.detail.value.demandName,
                   });
-                  wx.hideLoading();
+                  
                 }, 600);
 
               }
