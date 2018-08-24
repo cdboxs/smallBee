@@ -46,7 +46,8 @@ Page({
 
   onLoad: function (options) {
     let that = this;
-
+    that.setData({ page: 1 });
+    that.getIndexData();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -62,8 +63,7 @@ Page({
    */
   onShow: function () {
     let that = this;
-    that.setData({ page: 1 });
-    that.getIndexData();
+    
   },
 
   /**

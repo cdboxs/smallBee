@@ -75,7 +75,8 @@ Page({
   onLoad: function (options) {
     let that = this; 
     wx.removeStorageSync('cityInfo');
-
+    that.setData({ page: that.data.page, ActivityPage: 1 });
+    that.getIndexData();
 
 
   },
@@ -140,8 +141,7 @@ Page({
           }
 
         }
-        that.setData({ page: 1, ActivityPage: 1});
-        that.getIndexData();
+        
       },
       fail: function () {
         that.getCity();
@@ -312,13 +312,13 @@ Page({
               })
             }
           },
-          fail: function (e) {
-            wx.showToast({
-              title: '数据请求失败,请检测网络',
-              mask: true,
-              icon: 'none'
-            });
-          }
+          // fail: function (e) {
+          //   wx.showToast({
+          //     title: '数据请求失败,请检测网络',
+          //     mask: true,
+          //     icon: 'none'
+          //   });
+          // }
         })
       }
     };
@@ -555,13 +555,13 @@ Page({
         wx.hideLoading();
         
       },
-      fail: function (e) {
-        wx.showToast({
-          title: '数据请求失败,请检测网络',
-          mask: true,
-          icon: 'none'
-        });
-      }
+      // fail: function (e) {
+      //   wx.showToast({
+      //     title: '数据请求失败,请检测网络',
+      //     mask: true,
+      //     icon: 'none'
+      //   });
+      // }
     });
   },
   getIndexActivityList: function (postpage) {
@@ -632,13 +632,13 @@ Page({
        
 
       },
-      fail: function (e) {
-        wx.showToast({
-          title: '数据请求失败,请检测网络',
-          mask: true,
-          icon: 'none'
-        });
-      }
+      // fail: function (e) {
+      //   wx.showToast({
+      //     title: '数据请求失败,请检测网络',
+      //     mask: true,
+      //     icon: 'none'
+      //   });
+      // }
     });
   }
 
