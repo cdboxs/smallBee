@@ -22,7 +22,7 @@
         <text bindtap='goNewsPay' data-demandid='{{item.id}}'data-title="{{item.title}}">置顶</text> 
         <!-- <image src='../img/top.png' style='width:20px;height:20px;position:absolute;top:110rpx;right:12%;' bindtap='goNewsPay' data-demandid='{{item.id}}'data-title="{{item.title}}"></image> -->
         <!-- <image src='../img/del.png' class='del' catchtap='del' data-id='{{item.id}}'></image> -->
-        <text catchtap='demandU' data-id='{{item.id}}'>修改</text>
+        <text catchtap='demandU' data-id='{{item.id}}'>编辑</text>
         <text catchtap='del' data-id='{{item.id}}'>删除</text>
       </view>
      

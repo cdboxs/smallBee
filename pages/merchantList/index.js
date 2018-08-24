@@ -116,20 +116,24 @@ Page({
    * 列表页分类点击切换数据
    * **/ 
   checkClass:function(e){
+    console.log(e);
     let that=this;
     that.setData({
-      getClassID: e.target.dataset.id,
+      page: 1,
+      getClassID: e.currentTarget.dataset.id,
     });
+    that.getMerChantList(that.data.getClassID, that.data.page);
+    that.hidemask();  
   },
-  showShopData:function(e){
-    let that = this;
-    that.setData({
-      page:1,
-      classId:e.target.dataset.id
-    });
-    that.getMerChantList(e.target.dataset.id,that.data.page);
-      that.hidemask();   
-  },
+  // showShopData:function(e){
+  //   let that = this;
+  //   that.setData({
+  //     page:1,
+  //     classId:e.target.dataset.id
+  //   });
+  //   that.getMerChantList(e.target.dataset.id,that.data.page);
+  //     that.hidemask();   
+  // },
   /**
    * 列表页展示数据
    * **/ 
@@ -232,6 +236,13 @@ Page({
       classId: options.classId,
       className: options.classname
     });
+    if (that.data.classId) {
+      setTimeout(function () {
+        that.merchantClassify();
+        that.getMerChantList(that.data.classId, 1);
+        wx.hideLoading();
+      }, 800);
+    };
     
   },
 
@@ -248,13 +259,7 @@ Page({
    */
   onShow: function (e) {
     let that = this;
-    if (that.data.classId) {
-      setTimeout(function () {
-        that.merchantClassify();
-        that.getMerChantList(that.data.classId,1);
-        wx.hideLoading();
-      }, 800);
-    };
+   
   },
 
   /**

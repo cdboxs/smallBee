@@ -23,6 +23,9 @@ Page({
    */
   onLoad: function (options) {
     let that=this;
+    that.setData({
+      demandeID: options.id
+    });
     wx.showToast({
       title: '正在加载中...',
       mask: true,
@@ -39,8 +42,12 @@ Page({
           id: options.id
         },
         success:function(e){
+          wx.setNavigationBarTitle({
+            title: e.data.data.title,
+          });
             that.setData({
-              demandInfo:e.data.data
+              demandInfo:e.data.data,
+              title: e.data.data.title
             });
             wx.hideToast();
         }
@@ -108,6 +115,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+    var that = this;
+    return {
+      title: that.data.title,
+      desc: '小蜜蜂生活自助网',
+      path: '/pages/demandInfo/index?id=' + that.data.demandeID
+
+    }
   }
 })

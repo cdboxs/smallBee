@@ -21,7 +21,7 @@
           <text>{{item.tel}}</text>
         </view>
         <view class='operation'>
-          <text bindtap='ueditorAd' data-adid='{{item.id}}'>修改</text>
+          <text bindtap='ueditorAd' data-adid='{{item.id}}'>编辑</text>
           <text catchtap='del' data-id='{{item.id}}'>删除</text> 
         </view>
       </view>

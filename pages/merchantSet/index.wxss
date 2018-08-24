@@ -76,7 +76,13 @@ page{
   height: 250rpx;
   line-height: 50rpx;
 }
-
+.checkInF .selectADshow{
+   display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  background:#fcfcfc;
+}
 
 
 

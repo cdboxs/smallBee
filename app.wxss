@@ -222,15 +222,15 @@ border-right: 0;
 }
 /* 详情页返回首页 */
 .backHome{
-  width:32px;
-  height:32px;
+  width:108rpx;
+  height:110rpx;
   position: fixed;bottom:28rpx;right:28rpx;
 }
 /* 技术支持 */
 .support{
   width:100%;
   color:#777;
-  margin:20rpx 0;
+  margin:40rpx 0;
   font-size: 28rpx;
   overflow: hidden;
   box-sizing: border-box;
@@ -252,3 +252,4 @@ border-right: 0;
   border-radius: 25rpx;
   border:1rpx solid #ffc72a;
 }
+

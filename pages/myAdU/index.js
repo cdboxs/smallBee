@@ -49,9 +49,41 @@ Page({
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
         var tempFilePaths = res.tempFilePaths;
         //启动上传等待中...  
-        that.setData({
-          thumbnailN: tempFilePaths
+        wx.showLoading({
+          title: '正在上传中',
+          mask:true,
+          icon:'none'
+        })
+        wx.uploadFile({
+          url: app.globalData.APIURL + '/api/ad/upload',
+          filePath: tempFilePaths[0],
+          name: 'image',
+          formData: {
+            'image': tempFilePaths[0]
+          },
+          success: function (res) {
+            var e = JSON.parse(res.data);
+            console.log(e);
+            if (e.code==1){
+              that.setData({
+                thumbnail: e.data
+              });
+              wx.hideLoading();
+            }
+           
+
+          },
+          fail: function (res) {
+            wx.hideToast();
+            wx.showModal({
+              title: '错误提示',
+              content: '上传图片失败',
+              showCancel: false,
+              success: function (res) { }
+            })
+          }
         });
+    
 
       }
     });
@@ -60,7 +92,7 @@ Page({
   demandPic: function (i) {
     console.log(i.currentTarget.dataset.imgid);
     let that = this;
-    if (e.currentTarget.dataset.uploadtype == 2) {
+    if (i.currentTarget.dataset.uploadtype == 2) {
       wx.chooseImage({
         count: 4,  //最多可以选择的图片总数  
         sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有  
@@ -259,7 +291,6 @@ Page({
         icon: 'none',
         mask: true
       })
-      console.log(that.data.adid);
       wx.getStorage({
         key: 'loginStatus',
         success: function (res) {
@@ -283,16 +314,26 @@ Page({
             },
             success: function (res) {
               console.log(res);
-              wx.hideLoading();
               if (res.data.code == 1) {
                 setTimeout(function () {
                   wx.hideLoading();
-                  wx.navigateTo({
-                    url: '../adPay/index?adid=' + res.data.data + '&title=' + e.detail.value.demandName,
-                  });
-                  
+                 wx.navigateBack({
+                   delta:1
+                 });
                 }, 600);
-
+              } else if (res.data.code == 0){
+                wx.hideLoading();
+                wx.showToast({
+                  title: '修改失败',
+                  icon:'none',
+                  mask:true
+                })
+                setTimeout(function(){
+                  wx.navigateBack({
+                    delta: 1
+                  });
+                },800);
+               
               }
             },
             fail: function (e) {

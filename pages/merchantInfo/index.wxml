@@ -47,7 +47,7 @@
   <text class='jjTitle'>店铺简介</text>
   <view class='jjInfo'>
     {{merchantInfo.description}}
-    <image wx:for="{{merchantInfo.img}}" wx:key="key"  src='{{APIURL}}/upload/shop/{{item}}' mode='aspectFill'></image>
+    <image wx:for="{{merchantInfo.img}}" wx:key="key"  src='{{APIURL}}/upload/shop/{{item}}' mode='widthFix'></image>
   </view>
  
   <button class='lyzx' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="showDiscussf">发表评论</button>

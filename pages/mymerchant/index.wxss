@@ -59,6 +59,7 @@ page{
   flex-flow: row wrap;
   align-items: center;
   justify-content: space-between;
+  background:#fcfcfc;
 }
 .checkInF view label{
   font-size: 30rpx;
@@ -123,6 +124,7 @@ page{
   display: block;
   color:red;
 }
+
 
 /* 协议 */
 .Agreement{

@@ -41,9 +41,8 @@
   <view>
     <label>封面图片：（建议尺寸 750*357px）</label><label class='tipx'>*</label> 
     <view class='picAdd'>
-      <input type='text' name="fmdemandPic" style='display:none;' value='{{thumbnail}}' maxlength='500'></input>
-        <image wx:if="{{thumbnailN}}" src="{{thumbnailN}}" class='addPic' bindtap='thumbnailU'></image>
-        <image wx:elif="{{thumbnail}}" src="{{APIURL}}/upload/ad/{{thumbnail}}" class='addPic' bindtap='thumbnailU'></image>
+        <input type='text' name="fmdemandPic" style='display:none;' value='{{thumbnail}}' maxlength='500'></input>
+        <image wx:if="{{thumbnail}}" src="{{APIURL}}/upload/ad/{{thumbnail}}" class='addPic' bindtap='thumbnailU'></image>
     </view>
   </view>
  

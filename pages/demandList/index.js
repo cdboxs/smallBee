@@ -113,18 +113,21 @@ Page({
   checkClass:function(e){
     let that=this;
     that.setData({
+      page: 1,
       getClassID: e.target.dataset.id,
     });
+    that.getMerChantList(e.target.dataset.id, that.data.page);
+    that.hidemask();  
   },
-  showShopData:function(e){
-    let that = this;
-    that.setData({
-      page:1,
-      classId:e.target.dataset.id
-    });
-    that.getMerChantList(e.target.dataset.id,that.data.page);
-      that.hidemask();   
-  },
+  // showShopData:function(e){
+  //   let that = this;
+  //   that.setData({
+  //     page:1,
+  //     classId:e.target.dataset.id
+  //   });
+  //   that.getMerChantList(e.target.dataset.id,that.data.page);
+  //     that.hidemask();   
+  // },
   /**
    * 列表页展示数据
    * **/ 

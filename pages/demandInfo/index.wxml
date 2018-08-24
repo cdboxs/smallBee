@@ -16,7 +16,7 @@
   <text class='jjTitle'>详情信息</text>
   <view>{{demandInfo.content}}</view>
   <block wx:for="{{demandInfo.img}}" wx:key="key">
-  <image class='demandPics' wx:if="{{item}}" src='{{APIURL}}/upload/news/{{item}}'mode='aspectFill'></image>
+  <image class='demandPics' wx:if="{{item}}" src='{{APIURL}}/upload/news/{{item}}'mode='widthFix'></image>
  </block>
 </scroll-view>
 <view class='support'>
