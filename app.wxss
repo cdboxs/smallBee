@@ -224,7 +224,7 @@ border-right: 0;
 .backHome{
   width:32px;
   height:32px;
-  position: fixed;top:28rpx;left:28rpx;
+  position: fixed;bottom:28rpx;right:28rpx;
 }
 /* 技术支持 */
 .support{
