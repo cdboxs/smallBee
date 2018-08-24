@@ -485,10 +485,7 @@ Page({
         }
       },
     });
-    that.getIndexShopList(that.data.page = 1);
-    that.getIndexActivityList(that.data.page = 1);
-    
-   
+    that.getIndexShopList(that.data.page = 1); 
   },
 
   getIndexShopList: function (postpage) {

@@ -45,6 +45,11 @@ Page({
       url: '../index/index',
     })
   },
+  callAll(e){
+    wx.makePhoneCall({
+      phoneNumber: e.target.dataset.phonen,
+    })
+  },
   /**
    * 判断是否授权才能评论
    * **/

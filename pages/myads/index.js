@@ -195,7 +195,6 @@ menuS: function (e) {
             uid: res.data.userID
           },
           success: function (res) {
-            console.log(res);
             if(res.data.code==1){
                 that.setData({
                   myDemandList:res.data.data
@@ -234,7 +233,6 @@ menuS: function (e) {
   },
   addAd: function (e) {
     let that = this;
-    console.log(e);
     if (e.detail.value.demandName=="") {
       wx.showToast({
         title: '广告名称不能为空！',
@@ -299,8 +297,6 @@ menuS: function (e) {
 
             },
             success: function (res) {
-              console.log(res);
-              
               if (res.data.code == 1) {
                 setTimeout(function () {
                   wx.hideLoading();

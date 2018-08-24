@@ -83,6 +83,6 @@
 </view>
 <view class='support'>
   <text>——《小蜜蜂生活自助网》-提供技术支持——</text>
-  <text>15369021786</text>
+  <text bindtap='callAll' data-phonen="15369021786">15369021786</text>
 </view>
 <image src='../img/backHome.png' class='backHome' bindtap='backHome'></image>

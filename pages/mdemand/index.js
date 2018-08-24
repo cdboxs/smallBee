@@ -41,6 +41,11 @@ Page({
       url: '../demandPay/index?demandid=' + e.currentTarget.dataset.demandid + '&title=' + e.currentTarget.dataset.title,
     })
   },
+  demandU(e){
+    wx.navigateTo({
+      url: '../mdemandU/index?demanduid=' + e.currentTarget.dataset.id
+    })
+  },
   demandPic: function (e) {
     let that = this;
     wx.chooseImage({

@@ -60,6 +60,73 @@ Page({
   demandPic: function (i) {
     console.log(i.currentTarget.dataset.imgid);
     let that = this;
+    if (e.currentTarget.dataset.uploadtype == 2) {
+      wx.chooseImage({
+        count: 4,  //最多可以选择的图片总数  
+        sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有  
+        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有  
+        success: function (res) {
+          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
+          var tempFilePaths = res.tempFilePaths;
+          //启动上传等待中...  
+          wx.showToast({
+            title: '正在上传...',
+            icon: 'loading',
+            mask: true,
+            duration: 10000
+          })
+          var uploadImgCount = 0;
+          for (var i = 0; i < tempFilePaths.length; i++) {
+            wx.uploadFile({
+              url: app.globalData.APIURL + '/api/ad/upload',
+              filePath: tempFilePaths[i],
+              name: 'image',
+              success: function (res) {
+                uploadImgCount++;
+                var e = JSON.parse(res.data);
+                //服务器返回格式: { "Catalog": "testFolder", "FileName": "1.jpg", "Url": "https://test.com/1.jpg" }  
+                var productInfo = that.data.demandListPic;
+                if (productInfo.bannerInfo == null) {
+                  productInfo.bannerInfo = [];
+                }
+                productInfo.bannerInfo.push({
+                  "imgs": e.data,
+                });
+
+                var arr = [];
+                for (var i = 0; i < productInfo.bannerInfo.length; i++) {
+                  arr.push(productInfo.bannerInfo[i].imgs);
+                }
+                var arrJson = JSON.stringify(arr);
+
+                that.setData({
+                  demandListPic: productInfo,
+                  demandPic: arrJson
+                });
+                if (arr.length >= 4) {
+                  that.setData({
+                    addPicShow: false
+                  });
+                }
+                //如果是最后一张,则隐藏等待中  
+                if (uploadImgCount == tempFilePaths.length) {
+                  wx.hideToast();
+                }
+              },
+              fail: function (res) {
+                wx.hideToast();
+                wx.showModal({
+                  title: '错误提示',
+                  content: '上传图片失败',
+                  showCancel: false,
+                  success: function (res) { }
+                })
+              }
+            });
+          }
+        }
+      });
+    }
       wx.chooseImage({
         count: 1,  //最多可以选择的图片总数  
         sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有  

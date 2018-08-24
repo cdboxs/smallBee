@@ -47,13 +47,24 @@
     </view>
   </view>
  
-  <view>
+  <view wx:if="{{adInfo.img}}">
     <label>广告图片：（建议尺寸 750*357px）</label>
     <view class='picAdd'>
       <input type='text' name="demandPic" style='display:none;' value='{{demandPic}}' maxlength='500'></input>
       <block wx:for="{{adInfo.img}}" wx:key="key">
         <image wx:if="{{item.img_url}}" src='{{APIURL}}/upload/ad/{{item.img_url}}' class='addPic' data-imgid="{{item.id}}" bindtap='demandPic'></image>
       </block>
+    </view>
+  </view>
+
+   <view wx:else>
+    <label>广告图片：（建议尺寸 750*357px）</label>
+    <view class='picAdd'>
+      <input type='text' name="demandPic" style='display:none;' value='{{demandPic}}' maxlength='500'></input>
+      <block wx:for="{{demandListPic.bannerInfo}}" wx:key="key">
+        <image wx:if="{{item.imgs}}" src='{{APIURL}}/upload/ad/{{item.imgs}}' class='addPic'></image>
+      </block>
+      <image wx:if="{{addPicShow}}" src='../img/addPic.png' class='addPic'  data-uploadType="2" bindtap='demandPic'></image>
     </view>
   </view>
   <!-- <view>
