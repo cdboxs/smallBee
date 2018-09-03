@@ -11,7 +11,7 @@ Page({
     demandLenght: '',
     APIURL: app.globalData.APIURL,
     demandList: [],
-    page: 1,
+    indexpage: 1,
     ActivityPage:1,
     class_id: '',
     cityName: '',
@@ -26,6 +26,10 @@ Page({
   },
   //事件处理函数
   goCity: function (e) {
+    let that=this;
+    that.setData({
+      indexpage:1
+    });
     wx.navigateTo({
       url: '../city/index',
     })
@@ -55,18 +59,27 @@ Page({
     that.setData({
       currentTab: e.currentTarget.dataset.currenttab
     });
-    
+   
   },
   switchToch:function(e){
     var that = this;
+    wx.pageScrollTo({
+      scrollTop: 0,
+   
+    })
     that.setData({
       currentTab: e.detail.current
     });
-    if (e.detail.current == 0) {
-      that.getIndexShopList(that.data.page = 1);
-    } else if (e.detail.current == 1) {
-      that.getIndexActivityList(that.data.ActivityPage = 1);
-    }
+    setTimeout(()=>{
+      if (e.detail.current == 0) {
+        that.getIndexShopList(that.data.page = 1);
+      } else if (e.detail.current == 1) {
+        that.getIndexActivityList();
+      }
+    },200);
+   
+   
+    
   },
   /**
      * 生命周期函数--监听页面加载
@@ -75,8 +88,8 @@ Page({
   onLoad: function (options) {
     let that = this; 
     wx.removeStorageSync('cityInfo');
-    that.setData({ page: that.data.page, ActivityPage: 1 });
-    that.getIndexData();
+ 
+   
 
 
   },
@@ -85,6 +98,7 @@ Page({
    */
   onReady: function () {
     let that = this;
+    
   },
 
   /**
@@ -139,14 +153,15 @@ Page({
               district: '',
             });
           }
-
         }
-        
       },
       fail: function () {
         that.getCity();
       }
-    })
+    });
+    
+    that.getIndexData();
+   
   },
 
   /**
@@ -172,11 +187,11 @@ Page({
       mask: true
     });
     if(that.data.currentTab==0){
-      that.data.page = that.data.page + 1;
-      that.getIndexShopList(that.data.page);
+      that.data.indexpage = that.data.indexpage + 1;
+      that.getIndexShopList(that.data.indexpage);
     } else if (that.data.currentTab == 1) {
       that.data.ActivityPage = that.data.ActivityPage + 1;
-      that.getIndexActivityList(that.data.ActivityPage);
+      that.getIndexActivityListMore(that.data.ActivityPage);
     }
    
   },
@@ -294,7 +309,7 @@ Page({
                     cityID: getcityID,
                     district: getCityInfo.district
                   });
-                  that.getIndexData();
+                 that.getIndexData();
                 }
               }
             } else if(e.data.code==0){
@@ -372,6 +387,7 @@ Page({
    */
   getIndexData: function () {
     let that = this;
+    let cityInfo = wx.getStorageSync('cityInfo');
     //获取分类
     wx.request({
       url: app.globalData.APIURL + '/api/shop/classList',
@@ -403,66 +419,51 @@ Page({
       }
     });
     //获取公告数据
-    wx.getStorage({
-      key: 'cityInfo',
-      success: function (res) {
-        wx.request({
-          url: app.globalData.APIURL + '/api/notice/index',
-          method: 'POST',
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          data: {
-            area_id: res.data.cityID
-          },
-          success: function (e) {
-            that.setData({
-              Notice: e.data.data
-            });
-          }
-        });
+   
+    wx.request({
+      url: app.globalData.APIURL + '/api/notice/index',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
       },
-      fail: function (e) {
-      
+      data: {
+        area_id: cityInfo.cityID
+      },
+      success: function (e) {
+        that.setData({
+          Notice: e.data.data
+        });
       }
     });
     //获取首页广告
-    wx.getStorage({
-      key: 'cityInfo',
-      success: function (res) {
-        wx.request({
-          url: app.globalData.APIURL + '/api/ad/index',
-          method: 'POST',
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          data: {
-            area_id: res.data.cityID
-          },
-          success: function (e) {           
-            if(e.data.code==1){
-              var adlist = [];
-              for (var i = 0; i <= 1; i++) {
-                if (e.data.data[i] != undefined) {
-                  adlist.push(e.data.data[i]);
-                } else {
-                  adlist[i] = { id: 0 }
-                }
-              }
-              that.setData({
-                adlist: adlist,
-                adlistStatus:1
-              });
-            }else if(e.data.code==0){
-              that.setData({
-                adlistStatus: 0
-              });
+    wx.request({
+      url: app.globalData.APIURL + '/api/ad/index',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        area_id: cityInfo.cityID
+      },
+      success: function (e) {
+        if (e.data.code == 1) {
+          var adlist = [];
+          for (var i = 0; i <= 1; i++) {
+            if (e.data.data[i] != undefined) {
+              adlist.push(e.data.data[i]);
+            } else {
+              adlist[i] = { id: 0 }
             }
           }
-        });
-      },
-      fail: function (e) {
-
+          that.setData({
+            adlist: adlist,
+            adlistStatus: 1
+          });
+        } else if (e.data.code == 0) {
+          that.setData({
+            adlistStatus: 0
+          });
+        }
       }
     });
     wx.getStorage({
@@ -485,88 +486,165 @@ Page({
         }
       },
     });
-    that.getIndexShopList(that.data.page = 1); 
+    that.getIndexShopList(that.data.indexpage);
+    that.getIndexActivityList(that.data.ActivityPage);
   },
-
-  getIndexShopList: function (postpage) {
+//获取首页推荐商家
+  getIndexShopList: function (getpage) {
     let that = this;
     //获取首页推荐商家数据
-    wx.getStorage({
-      key: 'cityInfo',
-      success: function (res) {
-        wx.request({
-          url: app.globalData.APIURL + '/api/shop/index',
-          method: 'POST',
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          data: {
-            p: postpage,
-            area_id: res.data.cityID
-          },
-          success: function (e) {
-            if(e.data.code==1){
-              for(let i=0;i<e.data.data.length;i++){
-                e.data.data[i].address=e.data.data[i].address.substring(0, 12);
-              }
-            }
-            if (e.data.code == 1 && postpage == 1) {
-              that.setData({
-                merchantList: e.data.data,
-                yesData: true,
-                noData: false,
-                xqHeight: e.data.data.length*95
-              });
-             return;
-       
-            } else if (e.data.code == 0 && postpage == 1) {
-              setTimeout(function () {
-                that.setData({
-                  merchantList: [],
-                  yesData: false,
-                  noData: true,
-                });
-              }, 300);
-            } else if(e.data.code==0){
-              wx.showToast({
-                title: '没有更多了',
-                icon:'none',
-                mask:true
-              })
-            }
-           if (postpage <= e.data.pages) {
-              var getList = that.data.merchantList;
-              for (var i = 0; i < e.data.data.length; i++) {
-                getList.push(e.data.data[i]);
-              }
-              setTimeout(function () {
-                that.setData({
-                  merchantList: getList,
-                  yesData: true,
-                  noData: false,
-                  xqHeight: getList.length * 95
-                });
-              }, 300);
-           } 
-            
-
-          }
-        });
-        wx.hideLoading();
-        
+    let cityInfo = wx.getStorageSync('cityInfo');
+    wx.request({
+      url: app.globalData.APIURL + '/api/shop/index',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
       },
-      // fail: function (e) {
-      //   wx.showToast({
-      //     title: '数据请求失败,请检测网络',
-      //     mask: true,
-      //     icon: 'none'
-      //   });
-      // }
+      data: {
+        p: getpage,
+        area_id: cityInfo.cityID
+      },
+      success: function (e) {
+        wx.hideLoading();
+        if (e.data.code == 1) {
+          for (let i = 0; i < e.data.data.length; i++) {
+            e.data.data[i].address = e.data.data[i].address.substring(0, 12);
+          }
+        }
+        if (e.data.code == 1 && getpage==1) {
+          that.setData({
+            merchantList: e.data.data,
+            yesData: true,
+            noData: false,
+            xqHeight: e.data.data.length * 95
+          });
+
+        } else if (e.data.code == 0 && getpage == 1) {
+          setTimeout(function () {
+            that.setData({
+              merchantList: [],
+              yesData: false,
+              noData: true,
+            });
+          }, 300);
+        }
+        if (getpage <= e.data.pages) {       
+          var getList = that.data.merchantList;
+          for (var i = 0; i < e.data.data.length; i++) {
+            getList.push(e.data.data[i]);
+          }
+          setTimeout(function () {
+            that.setData({
+              merchantList: getList,
+              yesData: true,
+              noData: false,
+              xqHeight: getList.length * 95
+            });
+          }, 300);
+        } else if (e.data.code == 0 && getpage !=1) {
+        
+          wx.showToast({
+            title: '没有更多了',
+            icon: 'none',
+            mask: true
+          })
+        }
+      }
+    });
+    
+  },
+//首页商家加载更多
+  getIndexShopListMore: function (postpage) {
+    let that = this;
+    let cityInfo = wx.getStorageSync('cityInfo');
+    wx.request({
+      url: app.globalData.APIURL + '/api/shop/index',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        p: postpage,
+        area_id: cityInfo.cityID
+      },
+      success: function (e) {
+        if (e.data.code == 1) {
+          for (let i = 0; i < e.data.data.length; i++) {
+            e.data.data[i].address = e.data.data[i].address.substring(0, 12);
+          }
+        }
+
+        if (postpage <= e.data.pages) {
+          wx.hideLoading();
+          var getList = that.data.merchantList;
+          for (var i = 0; i < e.data.data.length; i++) {
+            getList.push(e.data.data[i]);
+          }
+          setTimeout(function () {
+            that.setData({
+              merchantList: getList,
+              yesData: true,
+              noData: false,
+              xqHeight: getList.length * 95
+            });
+          }, 300);
+        } else if (e.data.code == 0) {
+          wx.hideLoading();
+          wx.showToast({
+            title: '没有更多了',
+            icon: 'none',
+            mask: true
+          })
+        }
+      }
+    });
+    
+  },
+  //获取首页正在促销
+  getIndexActivityList: function () {
+    let that = this;
+    let cityInfo = wx.getStorageSync('cityInfo');
+    wx.request({
+      url: app.globalData.APIURL + '/api/shop/promotion',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        p: 1,
+        area_id: cityInfo.cityID
+      },
+      success: function (e) {
+        wx.hideLoading();
+        if (e.data.code == 1) {
+          for (let i = 0; i < e.data.data.length; i++) {
+            e.data.data[i].address = e.data.data[i].address.substring(0, 12);
+          }
+        }
+        if (e.data.code == 1) {
+          that.setData({
+            ActivityList: e.data.data,
+            yesData: true,
+            noData: false,
+            xqHeight: e.data.data.length * 95
+          });
+          return;
+
+        } else if (e.data.code == 0) {
+          setTimeout(function () {
+            that.setData({
+              ActivityList: [],
+              yesData: false,
+              noData: true,
+            });
+          }, 300);
+        } 
+      }
     });
   },
-  getIndexActivityList: function (postpage) {
+  //获取首页加载正在促销
+  getIndexActivityListMore: function (postpage) {
     let that = this;
-    //获取首页推荐商家数据
     wx.getStorage({
       key: 'cityInfo',
       success: function (res) {
@@ -587,30 +665,6 @@ Page({
                 e.data.data[i].address = e.data.data[i].address.substring(0, 12);
               }
             }
-            if (e.data.code == 1 && postpage == 1) {
-              that.setData({
-                ActivityList: e.data.data,
-                yesData: true,
-                noData: false,
-                xqHeight: e.data.data.length*95
-              });
-              return;
-
-            } else if (e.data.code == 0 && postpage == 1) {
-              setTimeout(function () {
-                that.setData({
-                  ActivityList: [],
-                  yesData: false,
-                  noData: true,
-                });
-              }, 300);
-            } else if (e.data.code == 0) {
-              wx.showToast({
-                title: '没有更多了',
-                icon: 'none',
-                mask: true
-              })
-            }
             if (postpage <= e.data.pages) {
               var getList = that.data.ActivityList;
               for (var i = 0; i < e.data.data.length; i++) {
@@ -624,21 +678,16 @@ Page({
                   xqHeight: getList.length * 95
                 });
               }, 300);
+            } else if (e.data.code == 0) {
+              wx.showToast({
+                title: '没有更多了',
+                icon: 'none',
+                mask: true
+              })
             }
-
-
           }
         });
-       
-
       },
-      // fail: function (e) {
-      //   wx.showToast({
-      //     title: '数据请求失败,请检测网络',
-      //     mask: true,
-      //     icon: 'none'
-      //   });
-      // }
     });
   }
 
