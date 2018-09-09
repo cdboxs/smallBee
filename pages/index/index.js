@@ -24,6 +24,7 @@ Page({
     noData: false,
     yesData: true,
   },
+
   //事件处理函数
   goCity: function (e) {
     let that=this;
@@ -72,7 +73,7 @@ Page({
     });
     setTimeout(()=>{
       if (e.detail.current == 0) {
-        that.getIndexShopList(that.data.page = 1);
+        that.getIndexShopList(that.data.page);
       } else if (e.detail.current == 1) {
         that.getIndexActivityList();
       }
@@ -88,9 +89,6 @@ Page({
   onLoad: function (options) {
     let that = this; 
     wx.removeStorageSync('cityInfo');
- 
-   
-
 
   },
   /**
@@ -98,7 +96,7 @@ Page({
    */
   onReady: function () {
     let that = this;
-    
+   
   },
 
   /**
@@ -159,8 +157,9 @@ Page({
         that.getCity();
       }
     });
-    
+
     that.getIndexData();
+    
    
   },
 
@@ -188,7 +187,7 @@ Page({
     });
     if(that.data.currentTab==0){
       that.data.indexpage = that.data.indexpage + 1;
-      that.getIndexShopList(that.data.indexpage);
+      that.getIndexShopListMore(that.data.indexpage);
     } else if (that.data.currentTab == 1) {
       that.data.ActivityPage = that.data.ActivityPage + 1;
       that.getIndexActivityListMore(that.data.ActivityPage);
@@ -486,32 +485,33 @@ Page({
         }
       },
     });
-    that.getIndexShopList(that.data.indexpage);
-    that.getIndexActivityList(that.data.ActivityPage);
+    
+    that.getIndexShopList();
+ 
   },
 //获取首页推荐商家
-  getIndexShopList: function (getpage) {
+  getIndexShopList: function () {
     let that = this;
     //获取首页推荐商家数据
     let cityInfo = wx.getStorageSync('cityInfo');
     wx.request({
-      url: app.globalData.APIURL + '/api/shop/index',
+      url: app.globalData.APIURL + '/api/shop/index1',
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
       data: {
-        p: getpage,
+        p: 1,
         area_id: cityInfo.cityID
       },
       success: function (e) {
         wx.hideLoading();
         if (e.data.code == 1) {
           for (let i = 0; i < e.data.data.length; i++) {
-            e.data.data[i].address = e.data.data[i].address.substring(0, 12);
+            e.data.data[i].description = e.data.data[i].description.substring(0, 56);
           }
         }
-        if (e.data.code == 1 && getpage==1) {
+        if (e.data.code == 1) {
           that.setData({
             merchantList: e.data.data,
             yesData: true,
@@ -519,7 +519,7 @@ Page({
             xqHeight: e.data.data.length * 95
           });
 
-        } else if (e.data.code == 0 && getpage == 1) {
+        } else if (e.data.code == 0) {
           setTimeout(function () {
             that.setData({
               merchantList: [],
@@ -528,34 +528,15 @@ Page({
             });
           }, 300);
         }
-        if (getpage <= e.data.pages) {       
-          var getList = that.data.merchantList;
-          for (var i = 0; i < e.data.data.length; i++) {
-            getList.push(e.data.data[i]);
-          }
-          setTimeout(function () {
-            that.setData({
-              merchantList: getList,
-              yesData: true,
-              noData: false,
-              xqHeight: getList.length * 95
-            });
-          }, 300);
-        } else if (e.data.code == 0 && getpage !=1) {
-        
-          wx.showToast({
-            title: '没有更多了',
-            icon: 'none',
-            mask: true
-          })
-        }
+   
       }
     });
     
   },
 //首页商家加载更多
-  getIndexShopListMore: function (postpage) {
+  getIndexShopListMore: function (postindexpage) {
     let that = this;
+   
     let cityInfo = wx.getStorageSync('cityInfo');
     wx.request({
       url: app.globalData.APIURL + '/api/shop/index',
@@ -564,17 +545,17 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       data: {
-        p: postpage,
+        p: postindexpage ,
         area_id: cityInfo.cityID
       },
       success: function (e) {
         if (e.data.code == 1) {
           for (let i = 0; i < e.data.data.length; i++) {
-            e.data.data[i].address = e.data.data[i].address.substring(0, 12);
+            e.data.data[i].address = e.data.data[i].address.substring(0, 56);
           }
         }
 
-        if (postpage <= e.data.pages) {
+        if (postindexpage <= e.data.pages) {
           wx.hideLoading();
           var getList = that.data.merchantList;
           for (var i = 0; i < e.data.data.length; i++) {
@@ -618,7 +599,7 @@ Page({
         wx.hideLoading();
         if (e.data.code == 1) {
           for (let i = 0; i < e.data.data.length; i++) {
-            e.data.data[i].address = e.data.data[i].address.substring(0, 12);
+            e.data.data[i].address = e.data.data[i].address.substring(0, 56);
           }
         }
         if (e.data.code == 1) {
@@ -662,7 +643,7 @@ Page({
             wx.hideLoading();
             if (e.data.code == 1) {
               for (let i = 0; i < e.data.data.length; i++) {
-                e.data.data[i].address = e.data.data[i].address.substring(0, 12);
+                e.data.data[i].address = e.data.data[i].address.substring(0, 56);
               }
             }
             if (postpage <= e.data.pages) {

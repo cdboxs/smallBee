@@ -94,7 +94,7 @@ Page({
     let that = this;
     if (i.currentTarget.dataset.uploadtype == 2) {
       wx.chooseImage({
-        count: 4,  //最多可以选择的图片总数  
+        count: 6,  //最多可以选择的图片总数  
         sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有  
         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有  
         success: function (res) {
@@ -127,6 +127,12 @@ Page({
 
                 var arr = [];
                 for (var i = 0; i < productInfo.bannerInfo.length; i++) {
+                  if (productInfo.bannerInfo.length > 6) {
+                    wx.showToast({
+                      title: '最多上传6张',
+                    })
+                    return;
+                  }
                   arr.push(productInfo.bannerInfo[i].imgs);
                 }
                 var arrJson = JSON.stringify(arr);
@@ -135,7 +141,7 @@ Page({
                   demandListPic: productInfo,
                   demandPic: arrJson
                 });
-                if (arr.length >= 4) {
+                if (arr.length >= 6) {
                   that.setData({
                     addPicShow: false
                   });

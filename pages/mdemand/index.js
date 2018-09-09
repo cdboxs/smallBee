@@ -82,6 +82,12 @@ Page({
     
               var arr = [];
               for (var i = 0; i < productInfo.bannerInfo.length; i++) {
+                if (productInfo.bannerInfo.length > 6) {
+                  wx.showToast({
+                    title: '最多上传6张',
+                  })
+                  return;
+                }
                 arr.push(productInfo.bannerInfo[i].imgs);
               }
               var arrJson = JSON.stringify(arr);

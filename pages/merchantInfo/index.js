@@ -50,6 +50,19 @@ Page({
       phoneNumber: e.target.dataset.phonen,
     })
   },
+  callPhone(){
+    let that=this;
+    let phoneNumber=that.data.merchantInfo.description.match(/((((13[0-9])|(15[^4])|(18[0,1,2,3,5-9])|(17[0-8])|(147))\d{8})|((\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}))?/g);
+    for (let i = 0; i < phoneNumber.length;i++){
+      if (phoneNumber[i]!=""){
+      
+        wx.makePhoneCall({
+          phoneNumber:''+phoneNumber[i]+'',
+        })
+      }
+    }
+   
+  },
   /**
    * 判断是否授权才能评论
    * **/
@@ -259,7 +272,7 @@ Page({
       mask: true,
       success: function () {
         wx.request({
-          url: app.globalData.APIURL + '/api/shop/shopInfo',
+          url: app.globalData.APIURL + '/api/shop/shopInfo1',
           method: 'POST',
           header: {
             'content-type': 'application/x-www-form-urlencoded'
@@ -269,21 +282,22 @@ Page({
           },
           success: function (e) {
             wx.setNavigationBarTitle({
-              title: e.data.data.name,
+              title: e.data.data.user_nickname,
             });
            
             if (e.data.code == 1) {
+              console.log(e);
               if (e.data.data.img.length == 0) {
                 that.setData({
                   merchantInfo: e.data.data,
                   dataShow: false,
-                  title:e.data.data.name
+                 
                 });
               } else {
                 that.setData({
                   merchantInfo: e.data.data,
                   dataShow: true,
-                  title: e.data.data.name
+          
                 });
               }
 

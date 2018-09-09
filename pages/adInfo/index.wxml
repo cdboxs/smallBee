@@ -35,6 +35,10 @@
 </view>
 <view class='adDetails'>
   <template is="wxParse" data="{{wxParseData:article.nodes}}"/> 
+  <view style='margin-top:20rpx;'>
+  <image wx:for="{{adinfo.img}}" wx:key="key"  src='{{APIURL}}/upload/ad/{{item}}' mode='widthFix'></image>
+  </view>
+  
 </view>
   
 

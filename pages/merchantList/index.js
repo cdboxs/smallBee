@@ -121,6 +121,8 @@ Page({
     that.setData({
       page: 1,
       getClassID: e.currentTarget.dataset.id,
+      classId: e.currentTarget.dataset.id,
+      className: e.currentTarget.dataset.classname
     });
     that.getMerChantList(that.data.getClassID, that.data.page);
     that.hidemask();  
@@ -144,7 +146,7 @@ Page({
         key: 'cityInfo',
         success: function (res) {
               wx.request({
-                url: app.globalData.APIURL + '/api/shop/shopList',
+                url: app.globalData.APIURL + '/api/shop/shopList1',
                 method: 'POST',
                 header: {
                   'content-type': 'application/x-www-form-urlencoded'
@@ -157,7 +159,7 @@ Page({
                 success: function (e) {
                   if (e.data.code == 1) {
                     for (let i = 0; i < e.data.data.length; i++) {
-                      e.data.data[i].address = e.data.data[i].address.substring(0, 12);
+                      e.data.data[i].description = e.data.data[i].description.substring(0, 56);
                     }
                   }
                   if (e.data.code == 0) {

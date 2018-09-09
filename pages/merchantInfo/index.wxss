@@ -19,6 +19,7 @@
   font-weight: 300;
   font-size: 33rpx;
   display: flex;
+  justify-content: space-around;
   align-items: center;
   box-sizing: border-box;
 }
@@ -28,6 +29,20 @@
   border-radius:50%;
   margin:0 20rpx;
   position: relative;top:-30rpx;
+}
+.merchantTitle text{
+  width:50%;
+ font-size: 30rpx;
+}
+.merchantTitle text:first-child{
+  width:60%;
+ font-size: 30rpx;
+ text-align: left;
+}
+.merchantTitle text:last-child{
+  width:40%;
+ font-size: 30rpx;
+ text-align: right;
 }
 .otherServer{
   width:100%;

@@ -1,4 +1,5 @@
 <!--index.wxml-->
+
 <view wx:if="{{loading}}" class='loading' style='width:{{screenWidth}}px;height:{{screenHeight}}px;'>
   <view>
     <image src='../img/loading.png' style='width:100px;height:100px;'></image>
@@ -58,7 +59,7 @@
   </swiper>
   <!--公告-->
   <view class='tt'>
-    <image src='../img/tt.png'></image>
+    <image src='../img/tt.gif'></image>
     <view bindtap='notice' data-id='{{Notice.id}}'>
       {{Notice.title}}
     </view>
@@ -98,20 +99,13 @@
               <image lazy-load="true" wx:else src='../img/nopicsmall-list.jpg' mode="aspectFit" style='width:100px;height:67px;'></image>
             </view>
             <view class='pinfo'>
-              <text class='title'>{{item.name}}</text>
+              <text class='title'>{{item.description}}</text>
               <view class='pother'>
-                <view class='pol'>
-                  <text>{{item.class_name}}</text>
-                  <text>{{item.commen_num}}条评论</text>
-                </view>
-                <view class='por'>
-                  <!-- <image src='../img/top.png'></image> -->
-                  <!-- <text>置顶</text>     -->
-                </view>
+              
               </view>
               <view class='address'>
-                <image src='../img/position.png'></image>
-                <text>{{item.address}}</text>
+                <!-- <image src='../img/position.png'></image>
+                <text>{{item.address}}</text> -->
               </view>
             </view>
           </view>
@@ -128,11 +122,10 @@
                   <image lazy-load="true" wx:else src='../img/nopicsmall-list.jpg' mode="aspectFit" style='width:100px;height:67px;'></image>
                 </view>
                 <view class='pinfo'>
-                  <text class='title'>{{item.name}}</text>
+                  <text class='title'>{{item.description}}</text>
                   <view class='pother'>
                     <view class='pol'>
-                      <text>{{item.class_name}}</text>
-                      <text>{{item.commen_num}}条评论</text>
+                     
                     </view>
                     <view class='por'>
                       <!-- <image src='../img/top.png'></image> -->

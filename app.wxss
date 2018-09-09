@@ -33,7 +33,7 @@ page {
 }
 .plh {
   color: #888;
-  font-size: 30rpx;
+  font-size: 35rpx;
 }
 
 .mask {

@@ -6,6 +6,7 @@
     "pages/merchantInfo/index",
     "pages/city/index",
     "pages/checkIn/index",
+    "pages/checkIntid/index",
     "pages/mdemand/index",
     "pages/member/index",
     "pages/merchantSet/index",

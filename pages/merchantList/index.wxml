@@ -30,7 +30,7 @@
   <view class='mask' wx:if="{{showMask}}" bindtap='hidemask' style='width:{{screenWidth}}px;height:{{screenHeight}}px;'></view>
   <view class='dropInfo' wx:if="{{showMask}}" style="width:{{screenWidth}}px">
       <block wx:for="{{Listclassify}}" wx:key="key">
-        <text bindtap='checkClass' data-id='{{item.id}}' style="{{getClassID==item.id ? 'color:#7d330b;':''}}">{{item.class_name}}</text>
+        <text bindtap='checkClass' data-id='{{item.id}}' data-classname="{{item.class_name}}" style="{{getClassID==item.id ? 'color:#7d330b;':''}}">{{item.class_name}}</text>
       </block>
   </view>
 
@@ -43,19 +43,19 @@
         <image lazy-load="true" wx:else src='../img/nopicsmall-list.jpg'mode="aspectFit" style='width:100px;height:67px;'></image>
         </view>
         <view class='pinfo'>
-          <text class='title'>{{item.name}}</text>
+          <text class='title'>{{item.description}}</text>
           <view class='pother'>
-            <view class='pol'>
+            <!-- <view class='pol'>
               <text>{{item.commen_num}}条评论</text>
-            </view>
+            </view> -->
             <view class='por'>
               <!-- <image src='../img/top.png'></image> -->
-              <text style='color:#ff0000;'>置顶</text> 
+              <!-- <text style='color:#ff0000;'>置顶</text>  -->
             </view>
           </view>
           <view class='address'>
-            <image src='../img/position.png'></image>
-            <text>{{item.address}}</text>
+            <!-- <image src='../img/position.png'></image>
+            <text>{{item.address}}</text> -->
           </view>
         </view>
       </view>
@@ -67,18 +67,18 @@
         <image lazy-load="true" wx:else src='../img/nopicsmall-list.jpg' mode="aspectFit" style='width:100px;height:67px;'></image>
         </view>
         <view class='pinfo'>
-          <text class='title'>{{item.name}}</text>
+          <text class='title'>{{item.description}}</text>
           <view class='pother'>
-            <view class='pol'>
+            <!-- <view class='pol'>
               <text>{{item.commen_num}}条评论</text>
-            </view>
+            </view> -->
             <view class='por'>
               <!-- <text>停车</text> -->
             </view>
           </view>
           <view class='address'>
-            <image src='../img/position.png'></image>
-            <text>{{item.address}}</text>
+            <!-- <image src='../img/position.png'></image>
+            <text>{{item.address}}</text> -->
           </view>
         </view>
       </view>

@@ -59,9 +59,7 @@ Page({
       }
     })
   },
-  getRegionTop:function(){
 
-  },
   getRegion: function (e) {
     if (e.target.dataset.districtname){
       var datas = {

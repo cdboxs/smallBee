@@ -34,24 +34,24 @@
 <form bindsubmit='addDemand' class='checkInF' wx:if="{{selected==2}}">
   <view>
     <label>便民名称：</label>
-    <input type='text' name="demandName" data-name="demandName" value="{{demandName}}" placeholder='请输入便民名称' placeholder-class='plh' bindinput='checkName'></input>
+    <input type='text' name="demandName" data-name="demandName" value="{{demandName}}" placeholder='请输入便民名称(必填)' placeholder-class='plh' bindinput='checkName'></input>
     <label class='tipx'>*</label>
   </view>
   <view>
     <label>联系电话：</label>
-    <input type='number' name="demandNum" placeholder='请输入联系电话' placeholder-class='plh' maxlength='11'></input>
+    <input type='number' name="demandNum" placeholder='请输入联系电话(必填)' placeholder-class='plh' maxlength='11'></input>
     <label class='tipx'>*</label>
   </view>
    <view wx:if="{{classname}}">
     <label>所属分类：</label>
-      <input type='text' disabled="true" value='{{classname}}' placeholder='请选择所属分类' placeholder-class='plh'></input>
+      <input type='text' disabled="true" value='{{classname}}' placeholder='请选择所属分类(必填)' placeholder-class='plh'></input>
        <input type='text' disabled="true" name="demandClassIfy" value='{{classid}}' style='display:none;'></input>
     <label class='tipx'>*</label>
   </view>
   <view wx:else>
     <label>所属分类：</label>
     <picker bindchange="selectClassify" value="{{classifyArr[classifyIndex].class_name}}" range="{{classifyArr}}" range-key='class_name'>
-      <input type='text' disabled="true" value='{{classifyArr[classifyIndex].class_name}}' placeholder='请选择所属分类' placeholder-class='plh'></input>
+      <input type='text' disabled="true" value='{{classifyArr[classifyIndex].class_name}}' placeholder='请选择所属分类(必填)' placeholder-class='plh'></input>
       <input type='text' name="demandClassIfy" disabled='true' style='display:none;' value="{{classifyArr[classifyIndex].id}}"></input>
     </picker>
     <label class='tipx'>*</label>
@@ -71,7 +71,7 @@
   </view>
   <view>
     <label>详细介绍：</label>
-    <textarea name="demandInfo" vlaue="" maxlength='150' placeholder='请输入详细需求' placeholder-class='plh'></textarea>
+    <textarea name="demandInfo" vlaue="" maxlength='150' placeholder='请输入详细介绍(必填)' placeholder-class='plh'></textarea>
     <label class='tipx'>*</label>
   </view>
   <view>
@@ -94,4 +94,9 @@
   <template is="wxParse" data="{{wxParseData:Agreement.nodes}}" />
 </view>
   <button class='checkInSend' form-type='submit'>立即发布</button>
+
+<view class='support' style='border-bottom:0;'>
+  <text>——《小蜜蜂生活自助网》-提供技术支持——</text>
+  <text bindtap='callAll' data-phonen="15369021786">15369021786</text>
+</view>
 </form>
