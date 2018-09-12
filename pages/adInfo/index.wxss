@@ -55,11 +55,14 @@ page{
 }
 .adDetails{
   width:100%;
-  padding:15rpx;
+  padding:15rpx 0;
   font-size: 30rpx;
   background:#fff;
   margin-top:10rpx;
   box-sizing: border-box;
+}
+.adDetails view:first-child{
+  padding:0 15rpx;
 }
 .showPic{
   background:#333;
