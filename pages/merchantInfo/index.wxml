@@ -15,7 +15,7 @@
 
 
 <view class='merchantjj'>
-  <text class='jjTitle'>店铺简介</text>
+  <!-- <text class='jjTitle'>店铺简介</text> -->
   <view class='jjInfo'>
     <text bindtap='callPhone'>{{merchantInfo.description}}</text>
     <image wx:for="{{merchantInfo.img}}" wx:key="key"  src='{{APIURL}}/upload/shop/{{item}}' mode='widthFix'></image>

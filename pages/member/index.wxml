@@ -17,11 +17,11 @@
     <text>置顶店铺</text>
     <image src='../img/more.png'></image>
   </view> -->
-  <view bindtap="mdemand">
+  <!-- <view bindtap="mdemand">
     <image src='../img/setxq.png'></image>
     <text>我的便民</text>
     <image src='../img/more.png'></image>
-  </view>
+  </view> -->
    <view bindtap="myads">
     <image src='../img/ad.png'></image>
     <text>我的广告</text>

@@ -25,14 +25,14 @@
     <label class='tipx'>*</label>
   </view>
 
-  <view class='selectADshow'>
+  <!-- <view class='selectADshow'>
     <label>显示区域：商家首页显示</label>
     <switch bindchange="selectADshow" checked='{{ADShopshow}}' data-ADshowID="1"/>
   </view>
     <view class='selectADshow'>
     <label>显示区域：便民首页显示</label>
     <switch bindchange="selectADshow" checked='{{ADdemandshow}}' data-ADshowID="2"/>
-  </view>
+  </view> -->
   <view>
     <label>广告介绍：</label>
     <textarea name="demandInfo"  maxlength='150'  data-name="demandInfo" value="{{demandInfo}}" bindinput='checkdemandInfo' placeholder='广告详细内容' placeholder-class='plh'></textarea>

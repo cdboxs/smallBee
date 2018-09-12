@@ -14,7 +14,7 @@
       <view class='pinfo'>
         <text class='title'>{{item.title}}</text>
          <view class='address'>
-          <text>{{item.area}}--{{item.weizhi}}</text>
+          <!-- <text>{{item.area}}--{{item.weizhi}}</text> -->
         </view>
         <view class='address'>
           <image src='../img/xqcall.png'></image>
@@ -56,14 +56,14 @@
     <input type='text' name="address"  data-name="address" value="{{address}}" bindinput='checkaddress' placeholder='请输入详细地址' placeholder-class='plh' maxlength='20'></input>
     <label class='tipx'>*</label>
   </view>
-  <view class='selectADshow'>
+  <!-- <view class='selectADshow'>
     <label>显示区域：商家首页显示</label>
     <switch bindchange="selectADshow" checked='{{ADShopshow}}' data-ADshowID="1"/>
   </view>
     <view class='selectADshow'>
     <label>显示区域：便民首页显示</label>
     <switch bindchange="selectADshow" checked='{{ADdemandshow}}' data-ADshowID="2"/>
-  </view>
+  </view> -->
   <view>
     <label>广告介绍：</label>
     <textarea name="demandInfo"  maxlength='150'  data-name="demandInfo" value="{{demandInfo}}" bindinput='checkdemandInfo' placeholder='广告详细内容' placeholder-class='plh'></textarea>

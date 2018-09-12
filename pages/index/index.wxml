@@ -84,13 +84,7 @@
     </view>
   </view>
 
-  <view class='switch'>
-    <view class="{{currentTab==0?'switchActive':''}}" bindtap='switchClick' data-currentTab="0">推荐商家</view>
-    <view class="{{currentTab==1?'switchActive':''}}" bindtap='switchClick' data-currentTab="1">正在促销</view>
-  </view>
-  <swiper bindchange="switchToch" current="{{currentTab}}"style="height:{{xqHeight}}px;">
-    <swiper-item>
-      <view class='productList'>
+  <view class='productList'>
         <view wx:if="{{noData}}" class='ynData'>o(╥﹏╥)o暂无数据</view>
         <block wx:for="{{merchantList}}" wx:key="key" wx:if="{{yesData}}">
           <view class='product' bindtap='merchantInfo' data-shopid='{{item.id}}'>
@@ -111,37 +105,6 @@
           </view>
         </block>
       </view>
-    </swiper-item>
-    <swiper-item>
-          <view class='productList'>
-            <view wx:if="{{noData}}" class='ynData'>o(╥﹏╥)o暂无数据</view>
-            <block wx:for="{{ActivityList}}" wx:key="key" wx:if="{{yesData}}">
-              <view class='product' bindtap='merchantInfo' data-shopid='{{item.id}}'>
-                <view class='plp'>
-                  <image wx:if="{{item.logo}}" src='{{APIURL}}/upload/shop/{{item.logo}}' mode="widthFix" style='width:100%;height:100%;'></image>
-                  <image lazy-load="true" wx:else src='../img/nopicsmall-list.jpg' mode="aspectFit" style='width:100px;height:67px;'></image>
-                </view>
-                <view class='pinfo'>
-                  <text class='title'>{{item.description}}</text>
-                  <view class='pother'>
-                    <view class='pol'>
-                     
-                    </view>
-                    <view class='por'>
-                      <!-- <image src='../img/top.png'></image> -->
-                      <!-- <text>置顶</text>     -->
-                    </view>
-                  </view>
-                  <view class='address'>
-                    <image src='../img/position.png'></image>
-                    <text>{{item.address}}</text>
-                  </view>
-                </view>
-              </view>
-            </block>
-          </view>
-    </swiper-item>
-  </swiper>
 
 
 

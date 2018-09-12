@@ -153,55 +153,20 @@ Page({
   checkInF: function (e) {
     let that = this;
 
-    if (e.detail.value.shopName == "") {
-      wx.showToast({
-        title: '商户名不得为空！',
-        mask: true,
-        icon: 'none',
-      });
-      return false;
-    } else if (e.detail.value.shopPhone == "" || e.detail.value.shopPhone.length != 11) {
-      wx.showToast({
-        title: '电话输入有误！',
-        mask: true,
-        icon: 'none',
-      });
-      return false;
-    } else if (e.detail.value.shopClassIfyID == "") {
+     if (e.detail.value.shopClassIfyID == "") {
       wx.showToast({
         title: '请选择商店分类！',
         mask: true,
         icon: 'none',
       });
       return false;
-    } else if (e.detail.value.shopCityID == "") {
-      wx.showToast({
-        title: '请选择所在城市（县）！',
-        mask: true,
-        icon: 'none',
-      });
-      return false;
-    } else if (e.detail.value.shopAddress == "") {
-      wx.showToast({
-        title: '详细地址不能为空！',
-        mask: true,
-        icon: 'none',
-      });
-      return false;
-    } else if (e.detail.value.start_time == "" || e.detail.value.stop_time == "") {
-      wx.showToast({
-        title: '营业时间有误！',
-        mask: true,
-        icon: 'none',
-      });
-      return false;
-    }else {
+    } else {
       wx.getStorage({
         key: 'loginStatus',
         success: function (res) {
 
           wx.request({
-            url: app.globalData.APIURL + '/api/user/updShop',
+            url: app.globalData.APIURL + '/api/user/updShop1',
             method: 'POST',
             header: {
               'content-type': 'application/json'
@@ -210,15 +175,15 @@ Page({
               id: e.detail.value.shopid,//店铺id
               area_id: e.detail.value.shopCityID,//城市ID
               class_id: e.detail.value.shopClassIfyID,//分类ID
-              name: e.detail.value.shopName,//商户名称
-              tel: e.detail.value.shopPhone,//商户电话
-              address: e.detail.value.shopAddress,//详细地址
-              start_time: e.detail.value.start_time,//开始时间
-              stop_time: e.detail.value.stop_time,//结束时间
+              // name: e.detail.value.shopName,//商户名称
+              // tel: e.detail.value.shopPhone,//商户电话
+              // address: e.detail.value.shopAddress,//详细地址
+              // start_time: e.detail.value.start_time,//开始时间
+              // stop_time: e.detail.value.stop_time,//结束时间
               description: e.detail.value.shopJJ,//介绍
-              img: e.detail.value.shopics,//实景图
-              type: that.data.activityType,//活动状态
-              promotion_description: e.detail.value.activityInfo,//活动内容
+              //img: e.detail.value.shopics,//实景图
+              //type: that.data.activityType,//活动状态
+              //promotion_description: e.detail.value.activityInfo,//活动内容
               //logo: e.detail.value.shopLogo,//商户logo
             },
             success: function (e) {

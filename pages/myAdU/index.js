@@ -315,7 +315,7 @@ Page({
               uid: res.data.userID,
               area_id: cityInfo.cityID,
               thumbnail: e.detail.value.fmdemandPic,
-              the_where: that.data.adshowid //广告位置 1 商家页 2 便民页
+              the_where: 1 //广告位置 1 商家页 2 便民页
 
             },
             success: function (res) {

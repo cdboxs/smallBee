@@ -5,7 +5,7 @@
 </view>
 <form bindsubmit='checkInF' class='checkInF'>
   <input type='text' style='display:none;' name="shopid" value="{{id}}"></input>
-  <view>
+  <!-- <view>
     <label>商店名称：</label>
     <input type='text' data-name="{{name}}"  bindinput='checkName' name="shopName" placeholder='请输入商家名称' value='{{name}}' placeholder-class='plh'></input>
     <label class='tipx'>*</label>
@@ -14,7 +14,7 @@
     <label>商店电话：</label>
     <input type='number' name="shopPhone"  placeholder='请输入商店电话' value="{{tel}}" placeholder-class='plh' maxlength='11'></input>
     <label class='tipx'>*</label>
-  </view>
+  </view> -->
   <view>
     <label>所属分类：</label>
     <picker bindchange="selectClassify" value="{{classifyArr[classifyIndex].class_name}}" range="{{classifyArr}}" range-key='class_name'>
@@ -23,7 +23,7 @@
     </picker>
     <label class='tipx'>*</label>
   </view>
-  <view>
+  <!-- <view>
     <label>当前城市：</label>
     <input wx:if="{{indexShowCity==0&&district==''}}" type='text' name="shopCity" disabled="true" value='{{cityName}}'></input>
     <input wx:if="{{indexShowCity==0&&cityName&&district}}" type='text' name="shopCity" disabled="true" value='{{cityName}}-{{district}}'></input>
@@ -54,9 +54,8 @@
   </view>
   <view wx:if="{{activityShow}}">
     <textarea name="activityInfo" vlaue="" maxlength='150' placeholder='请输入活动介绍' placeholder-class='plh'></textarea>
-  </view>
+  </view> -->
   <view>
-    <label>店铺介绍：</label>
     <textarea name="shopJJ" maxlength='150' placeholder="{{description?'':'请输入店铺介绍'}}" value="{{description}}" placeholder-class='plh'></textarea>
     <!-- <label class='tipx'>*</label> -->
   </view>

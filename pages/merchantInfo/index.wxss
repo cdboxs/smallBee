@@ -93,7 +93,7 @@
 .merchantjj,.activity{
   width: 94%;
   overflow: hidden;
-  margin:20rpx auto;
+  margin:0 auto;
   background:#fff;
   padding:3%;
 }
@@ -111,13 +111,12 @@
   border-left:3px solid #ffc72a;
 }
 .merchantjj .jjInfo{
-  margin-top:3%;
   padding-top:20rpx;
-border-top:1rpx solid #eee;
+  line-height: 30px;
 }
 .merchantjj .jjInfo image{
   width:100%;
-  margin:0 auto;
+  margin:20rpx auto;
 }
 .merchantjj .lyzx{
   width:60%;
