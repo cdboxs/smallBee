@@ -230,7 +230,15 @@ Page({
       shopAddress: e.detail.value.replace(/\s+/g,"")
     })
   },
+  autoKeep(e){
+    console.log(e.detail.value);
+    wx.setStorage({
+      key: 'checkIninfo',
+      data: e.detail.value,
+    })
+  },
   checkInF: function (e) {
+    console.log(e);
     let that = this;
     if (e.detail.value.shopClassIfyID == "") {
       wx.showToast({
@@ -277,7 +285,13 @@ Page({
               success: function (o) {
                 
                 if (o.data.code == 1) {
+                  wx.showToast({
+                    title: '发布成功',
+                    mask:true,
+                    icon:'none'
+                  })
                   setTimeout(function(){
+                    wx.removeStorageSync('checkIninfo');
                     wx.navigateTo({
                       url: '../pay/index?shopid=' + o.data.data + '&shop_name=' + o.data.shop_name,
                     });
@@ -338,12 +352,14 @@ Page({
               },
               success: function (o) {
                 if (o.data.code == 1) {
+                  wx.removeStorageSync('checkIninfo');
                   setTimeout(function(){
                       wx.showToast({
-                        title: '入驻成功',
+                        title: '发布成功',
                         icon: 'success',
                         mask: true,
                         success: function () {
+                          wx.removeStorageSync('checkIninfo');
                           wx.switchTab({
                             url: '../index/index',
                           });
@@ -520,7 +536,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that=this;
+    let checkIninfo=wx.getStorageSync('checkIninfo');
+    console.log(checkIninfo);
+    that.setData({
+      checkIninfos: checkIninfo
+    });
   },
 
   /**

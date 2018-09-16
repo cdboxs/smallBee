@@ -2,7 +2,7 @@
 <form class='pay' bindsubmit='order'>
   <image src='../img/logo.png'></image>
   <view>
-    <input type='text' name="shopName" value='{{shop_name}}' disabled='true'>
+    <input type='text' name="shopName" value='{{shop_name}}' disabled='true' style='display:none;'>
     <image src='../img/shopIcon.png'></image>
     </input>
     <input type='text' name="shopID" value='{{shopid}}' style='display:none;' />

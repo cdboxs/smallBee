@@ -60,8 +60,11 @@
   <!--公告-->
   <view class='tt'>
     <image src='../img/tt.gif'></image>
-    <view bindtap='notice' data-id='{{Notice.id}}'>
+    <view wx:if="{{Notice}}" bindtap='notice' data-id='{{Notice.id}}'>
       {{Notice.title}}
+    </view>
+    <view wx:else >
+      {{notInfo}}
     </view>
   </view>
   <!--广告  -->

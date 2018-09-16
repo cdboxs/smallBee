@@ -9,7 +9,7 @@
 <view class='system'>
    <view bindtap="mymerchant">
     <image src='../img/merchant.png'></image>
-    <text>我的店铺</text>
+    <text>我的发布</text>
     <image src='../img/more.png'></image>
   </view>
   <!--<view bindtap="goPay">

@@ -62,19 +62,16 @@
   </view> -->
   <view>
     <!-- <label>店铺介绍：</label> -->
-    <textarea name="shopJJ" vlaue="" maxlength='150' placeholder='请输入店铺介绍' placeholder-class='plh'></textarea>
+    <textarea name="shopJJ" value="{{checkIninfos?checkIninfos:''}}"  bindinput="autoKeep" placeholder='请输入发布介绍' placeholder-class='plh'></textarea>
     <view class='picAdd'>
-        <input type='hidden' name="shopics" style='display:none;' value='{{shopPicArr}}' maxlength='500'></input>
+        <input type='hidden' name="shopics" style='display:none;' value='{{shopPicArr}}' maxlength='1000'></input>
         <block wx:for="{{shopListPic.bannerInfo}}" wx:key="key">
           <image src='{{APIURL}}/upload/shop/{{item.imgs}}' class='addPic'></image>
         </block>
         <image wx:if="{{addPicShow}}" src='../img/addPic.png' class='addPic' bindtap='merchantPic'></image>
       </view>
   </view>
-  <view>
-    <label>店铺实景：（建议尺寸 750*357px）</label>
-    
-  </view>
+
   <view>
     <checkbox-group bindchange="payStatus">
       <checkbox value='{{payStatus}}' name="payStatus" checked='{{checked}}'></checkbox>
@@ -84,7 +81,7 @@
   <view class='Agreement'>
     <template is="wxParse" data="{{wxParseData:Agreement.nodes}}" />
   </view>
-  <button class='checkInSend' form-type='submit' disabled="{{sendDisabled}}">立即入驻</button>
+  <button class='checkInSend' form-type='submit' disabled="{{sendDisabled}}">立即发布</button>
  
 </form>
  <view class='support'>

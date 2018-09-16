@@ -2,7 +2,7 @@
 <import src="../wxParse/wxParse.wxml" />
 <view class='demandMenu'>
   <text bindtap='menuS' data-id="1" class="{{selected==1?'active':''}}">我的店铺</text>
-  <text bindtap='menuS' data-id="2" class="{{selected==2?'active':''}}">入驻店铺</text>
+  <text bindtap='menuS' data-id="2" class="{{selected==2?'active':''}}">发布店铺</text>
 </view>
 <view class='productList mtop' wx:if="{{selected==1}}">
   <view wx:if="{{noData}}" class='ynData'>o(╥﹏╥)o暂无数据</view>
@@ -86,7 +86,7 @@
   </view> -->
   <view>
     <label>店铺介绍：</label>
-    <textarea name="shopJJ" vlaue="" maxlength='150' placeholder='请输入店铺介绍' placeholder-class='plh'></textarea>
+    <textarea name="shopJJ" vlaue="{{checkIninfos?checkIninfos:''}}" bindtap='autoKeep' placeholder='请输入店铺介绍' placeholder-class='plh'></textarea>
      <view class='picAdd'>
       <input type='hidden' name="shopics" style='display:none;' value='{{shopPicArr}}' maxlength='500'></input>
       <block wx:for="{{shopListPic.bannerInfo}}" wx:key="key">

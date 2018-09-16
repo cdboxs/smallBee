@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/adPay/index",
+    "pages/pay/index",
     "pages/myads/index",
     "pages/merchantList/index",
     "pages/merchantInfo/index",
@@ -16,8 +18,6 @@
     "pages/demandInfo/index",
     "pages/demandPay/index",
     "pages/about/index",
-    "pages/pay/index",
-    "pages/adPay/index",
     "pages/adInfo/index",
     "pages/mymerchant/index",
     "pages/adInfo2/index",

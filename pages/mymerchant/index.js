@@ -87,6 +87,13 @@ Page({
     },1200);
     
   },
+  autoKeep(e) {
+    console.log(e.detail.value);
+    wx.setStorage({
+      key: 'checkIninfo',
+      data: e.detail.value,
+    })
+  },
   /**
    * 上传店铺实景图
    * **/
@@ -206,7 +213,6 @@ Page({
             uid: res.data.userID
           },
           success: function (res) {
-            console.log(res);
             if (res.data.code == 1) {
               for (let i = 0; i < res.data.data.length; i++) {
                 res.data.data[i].description = res.data.data[i].description.substring(0,56);
@@ -270,6 +276,7 @@ Page({
               },
               success: function (o) {
                 if (o.data.code == 1) {
+                  wx.removeStorageSync('checkIninfo');
                   wx.navigateTo({
                     url: '../pay/index?shopid=' + o.data.data + '&shop_name=' + o.data.shop_name,
                   })
@@ -326,6 +333,7 @@ Page({
               },
               success: function (o) {
                 if (o.data.code == 1) {
+                  wx.removeStorageSync('checkIninfo');
                   setTimeout(function () {
                     wx.showToast({
                       title: '入驻成功',
@@ -584,6 +592,11 @@ Page({
   onShow: function () {
     let that = this;
     that.myMerchantList();
+    let checkIninfo = wx.getStorageSync('checkIninfo');
+    console.log(checkIninfo);
+    that.setData({
+      checkIninfos: checkIninfo
+    });
   },
 
   /**

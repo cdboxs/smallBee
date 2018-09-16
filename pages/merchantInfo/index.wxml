@@ -20,13 +20,42 @@
     <text bindtap='callPhone'>{{merchantInfo.description}}</text>
     <image wx:for="{{merchantInfo.img}}" wx:key="key"  src='{{APIURL}}/upload/shop/{{item}}' mode='widthFix'></image>
   </view>
- 
+ <button class='lyzx' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="showDiscussf">发表评论</button>
 <view class='support'>
   <text>——《小蜜蜂生活自助网》-提供技术支持——</text>
   <text bindtap='callAll' data-phonen="15369021786">15369021786</text>
 </view>
 <image src='../img/backHome.png' class='backHome' bindtap='backHome'></image>
+
   <!--评论fixed  加点赞-->
+  <view class='mask' wx:if="{{showModal}}" bindtap='hidemask' style='height:{{screenHeight}}px;' catchtouchmove="myCatchTouch"></view>
+<form class='discussform' wx:if="{{showModal}}" bindsubmit="sendDiscuss">
+  <text>发表评论</text>
+  <textarea type="text" name="discussInfo" data-name="discussInfo" value='{{discussInfo}}' placeholder='请发表您的评价' adjust-position="true" cursor-spacing="1000px" bindinput='checkDisInfo'></textarea>
+  <button form-type='submit'>提交</button>
+</form>
+<view style="display:{{discussStust}};">
+  <view class='discuss'>
+    <text class='jjTitle'>最新评价</text>
+  </view>
+  <view class='discussList'>
+    <block wx:for="{{discussList}}" wx:key="key">
+      <view class='discussInfo'>
+        <view>
+          <text>{{item.nickname}}</text>
+          <text>{{item.creat_time}}</text>
+        </view>
+        <view>
+        {{item.content}}
+        </view>
+        <view>
+          <image src="{{item.is_like==0?'../img/good.png':'../img/good_a.png'}}" bindtap='good' data-id='{{item.id}}'></image>
+        </view>
+      </view>
+    </block>
+  </view>
+  </view>
 </view>
+
 
 

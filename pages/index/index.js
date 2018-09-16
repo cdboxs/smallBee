@@ -89,7 +89,11 @@ Page({
   onLoad: function (options) {
     let that = this; 
     wx.removeStorageSync('cityInfo');
-
+    setTimeout(()=>{
+      that.data.indexpage = 1;
+      that.getIndexShopList();
+    },1000);
+   
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -157,8 +161,8 @@ Page({
         that.getCity();
       }
     });
-
     that.getIndexData();
+    
     
    
   },
@@ -174,6 +178,8 @@ Page({
       mask:true
     })
     that.getIndexData();
+    that.data.indexpage = 1;
+    that.getIndexShopList();
   },
 
   /**
@@ -186,7 +192,7 @@ Page({
       mask: true
     });
     that.data.indexpage = that.data.indexpage + 1;
-    that.getIndexShopList(that.data.indexpage);
+    that.getIndexShopListMore(that.data.indexpage);
    
   },
   /**
@@ -424,9 +430,16 @@ Page({
         area_id: cityInfo.cityID
       },
       success: function (e) {
-        that.setData({
-          Notice: e.data.data
-        });
+        if(e.data.code==1){
+          that.setData({
+            Notice: e.data.data
+          });
+        } else if (e.data.code == 0){
+          that.setData({
+            notInfo: e.data.msg
+          });
+        }
+       
       }
     });
     //获取首页广告
@@ -480,15 +493,58 @@ Page({
         }
       },
     });
-    that.data.indexpage=1;
-    that.getIndexShopList(that.data.indexpage);
+   
  
   },
 //获取首页推荐商家
-  getIndexShopList: function (postpage) {
+  getIndexShopList: function () {
     let that = this;
     //获取首页推荐商家数据
-    console.log(postpage);
+    let cityInfo = wx.getStorageSync('cityInfo');
+    wx.request({
+      url: app.globalData.APIURL + '/api/shop/index1',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        p: 1,
+        area_id: cityInfo.cityID
+      },
+      success: function (e) {
+        wx.hideLoading();
+        if (e.data.code == 1) {
+          for (let i = 0; i < e.data.data.length; i++) {
+            e.data.data[i].description = e.data.data[i].description.substring(0, 56);
+          }
+        }
+        if (e.data.code == 1 ) {
+          that.setData({
+            merchantList: e.data.data,
+            yesData: true,
+            noData: false,
+            xqHeight: e.data.data.length * 95
+          });
+
+        } else if (e.data.code == 0) {
+          setTimeout(function () {
+            that.setData({
+              merchantList: [],
+              yesData: false,
+              noData: true,
+            });
+          }, 300);
+        }
+
+   
+      }
+    });
+    
+  },
+
+  //首页商家加载更多
+  getIndexShopListMore: function (postpage) {
+    let that = this;
     let cityInfo = wx.getStorageSync('cityInfo');
     wx.request({
       url: app.globalData.APIURL + '/api/shop/index1',
@@ -501,30 +557,13 @@ Page({
         area_id: cityInfo.cityID
       },
       success: function (e) {
-        wx.hideLoading();
         if (e.data.code == 1) {
           for (let i = 0; i < e.data.data.length; i++) {
             e.data.data[i].description = e.data.data[i].description.substring(0, 56);
           }
         }
-        if (e.data.code == 1 && postpage==1) {
-          that.setData({
-            merchantList: e.data.data,
-            yesData: true,
-            noData: false,
-            xqHeight: e.data.data.length * 95
-          });
 
-        } else if (e.data.code == 0 && postpage==1) {
-          setTimeout(function () {
-            that.setData({
-              merchantList: [],
-              yesData: false,
-              noData: true,
-            });
-          }, 300);
-        }
-        if (postpage < e.data.pages) {
+        if (postpage <= e.data.pages) {
           wx.hideLoading();
           var getList = that.data.merchantList;
           for (var i = 0; i < e.data.data.length; i++) {
@@ -538,7 +577,7 @@ Page({
               xqHeight: getList.length * 95
             });
           }, 300);
-        } else if (e.data.code == 0 && postpage > e.data.pages) {
+        } else if (e.data.code == 0) {
           wx.hideLoading();
           wx.showToast({
             title: '没有更多了',
@@ -546,12 +585,10 @@ Page({
             mask: true
           })
         }
-   
       }
     });
-    
-  },
 
+  },
  
 
 })
