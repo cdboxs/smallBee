@@ -64,6 +64,11 @@ page{
 .adDetails view:first-child{
   padding:0 15rpx;
 }
+.adDetails image{
+  display: block;
+  width:100%;
+  margin:0 auto;
+}
 .showPic{
   background:#333;
   position: fixed;top:0;left:0;z-index:99999;
