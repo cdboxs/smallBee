@@ -91,11 +91,11 @@
   position: absolute;top:0;right:2%;
 }
 .merchantjj,.activity{
-  width: 94%;
+  width:100%;
   overflow: hidden;
   margin:0 auto;
   background:#fff;
-  padding:3%;
+  padding:3% 0;
 }
 .activity view{
   font-size: 30rpx;
@@ -113,6 +113,13 @@
 .merchantjj .jjInfo{
   padding-top:20rpx;
   line-height: 30px;
+}
+.merchantjj .jjInfo text{
+  display: block;
+  width:100%;
+  padding:0 3%;
+  margin:0 auto;
+  box-sizing: border-box;
 }
 .merchantjj .jjInfo image{
   width:100%;

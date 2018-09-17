@@ -56,7 +56,7 @@
     <textarea name="activityInfo" vlaue="" maxlength='150' placeholder='请输入活动介绍' placeholder-class='plh'></textarea>
   </view> -->
   <view>
-    <textarea name="shopJJ" maxlength='150' placeholder="{{description?'':'请输入店铺介绍'}}" value="{{description}}" placeholder-class='plh'></textarea>
+    <textarea name="shopJJ" maxlength='1500' placeholder="{{description?'':'请输入店铺介绍'}}" value="{{description}}" placeholder-class='plh'></textarea>
     <!-- <label class='tipx'>*</label> -->
   </view>
   <!-- <view>

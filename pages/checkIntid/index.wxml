@@ -62,7 +62,7 @@
   </view> -->
   <view>
     <label>店铺介绍：</label>
-    <textarea name="shopJJ" vlaue=""  placeholder='请输入发布介绍' placeholder-class='plh'></textarea>
+    <textarea name="shopJJ" vlaue=""  placeholder='请输入发布介绍' placeholder-class='plh'maxlength="1500"></textarea>
     <view class='picAdd'>
       <input type='hidden' name="shopics" style='display:none;' value='{{shopPicArr}}' maxlength='1000'></input>
       <block wx:for="{{shopListPic.bannerInfo}}" wx:key="key">

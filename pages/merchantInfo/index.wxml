@@ -21,11 +21,7 @@
     <image wx:for="{{merchantInfo.img}}" wx:key="key"  src='{{APIURL}}/upload/shop/{{item}}' mode='widthFix'></image>
   </view>
  <button class='lyzx' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="showDiscussf">发表评论</button>
-<view class='support'>
-  <text>——《小蜜蜂生活自助网》-提供技术支持——</text>
-  <text bindtap='callAll' data-phonen="15369021786">15369021786</text>
-</view>
-<image src='../img/backHome.png' class='backHome' bindtap='backHome'></image>
+
 
   <!--评论fixed  加点赞-->
   <view class='mask' wx:if="{{showModal}}" bindtap='hidemask' style='height:{{screenHeight}}px;' catchtouchmove="myCatchTouch"></view>
@@ -55,7 +51,13 @@
     </block>
   </view>
   </view>
+  <view class='support'>
+  <text>——《小蜜蜂生活自助网》-提供技术支持——</text>
+  <text bindtap='callAll' data-phonen="15369021786">15369021786</text>
 </view>
+<image src='../img/backHome.png' class='backHome' bindtap='backHome'></image>
+</view>
+
 
 
 

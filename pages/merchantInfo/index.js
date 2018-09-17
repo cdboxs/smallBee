@@ -211,7 +211,6 @@ Page({
             p:that.data.page
           },
           success: function (e) {
-            console.log(e);
             if (e.data.code == 1) {
               that.setData({
                 discussList: e.data.data,
