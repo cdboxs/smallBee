@@ -66,11 +66,22 @@ Page({
       stop_time: e.detail.value
     })
   },
+  merchantInfo: function (e) {
+    wx.navigateTo({
+      url: '../merchantInfo/index?id=' + e.currentTarget.dataset.shopid,
+    })
+  },
   menuS: function (e) {
     var that = this;
     if (e.target.dataset.id) {
       that.setData({
         selected: e.target.dataset.id
+      });
+    }
+    let checkIninfo = wx.getStorageSync('checkIninfo');
+    if (checkIninfo && e.target.dataset.id==2) {
+      that.setData({
+        checkIninfos: checkIninfo
       });
     }
   },
@@ -89,10 +100,13 @@ Page({
   },
   autoKeep(e) {
     console.log(e.detail.value);
-    wx.setStorage({
-      key: 'checkIninfo',
-      data: e.detail.value,
-    })
+    if (e.detail.value){
+      wx.setStorage({
+        key: 'checkIninfo',
+        data: e.detail.value,
+      })
+    }
+    
   },
   /**
    * 上传店铺实景图
@@ -592,11 +606,8 @@ Page({
   onShow: function () {
     let that = this;
     that.myMerchantList();
-    let checkIninfo = wx.getStorageSync('checkIninfo');
-    console.log(checkIninfo);
-    that.setData({
-      checkIninfos: checkIninfo
-    });
+    
+   
   },
 
   /**

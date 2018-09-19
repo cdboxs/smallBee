@@ -131,8 +131,8 @@ Page({
               content: e.detail.value.discussInfo
             },
             success: function (e) {
+              that.onShow();
               if (e.data.code == 1) {
-                that.getDiscussList();
                 wx.showToast({
                   title: '评论成功',
                   icon: 'success',
@@ -176,7 +176,7 @@ Page({
                 icon: 'success',
                 mask: true,
                 success: function () {
-                  that.getDiscussList();
+                  that.onShow();
                 }
               })
             }else if(e.data.code==0){
@@ -206,11 +206,12 @@ Page({
             'content-type': 'application/x-www-form-urlencoded'
           },
           data: {
-            shop_id: that.data.shopID,
+            shop_id: res.data.shopID,
             uid: res.data.userID,
-            p:that.data.page
+            p:1
           },
           success: function (e) {
+            console.log(e);
             if (e.data.code == 1) {
               that.setData({
                 discussList: e.data.data,
@@ -269,6 +270,9 @@ Page({
     that.setData({
       shopID: options.id
     });
+    var loginStatus=wx.getStorageSync('loginStatus');
+    loginStatus.shopID = options.id;
+    wx.setStorageSync('loginStatus', loginStatus);
     wx.showLoading({
       title: '正在加载数据',
       mask: true,
@@ -338,7 +342,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+  console.log('1');
     var that=this;
     that.getDiscussList();
   },

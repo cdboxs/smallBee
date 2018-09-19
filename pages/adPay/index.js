@@ -185,36 +185,23 @@ Page({
     let that = this;
     /*加载我的店铺数据*/
     wx.showLoading({
-      title: '正在加载...',
+      title: '正在加载',
       mask: true,
     });
     setTimeout(function () {
       wx.request({
-        url: app.globalData.APIURL + '/api/News/newsInfo',
-        method: 'POST',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
+        url: app.globalData.APIURL + '/api/pay/adPrice',
+        method: 'GET',
+        success: function (res) {
+          that.setData({
+            money: that.data.days[that.data.selectDay] * res.data.data * that.data.days[that.data.discount],
+          });
+          wx.hideLoading();
         },
-        data: { id: that.data.adid },
-        success: function (e) {
-          if (e.data.code == 1) {
-            wx.request({
-              url: app.globalData.APIURL + '/api/pay/adPrice',
-              method: 'GET',
-              success: function (res) {
-                that.setData({
-                  money: that.data.days[that.data.selectDay] * res.data.data * that.data.days[that.data.discount],
-                });
-                wx.hideLoading();
-              },
-              error: function (res) {
+        error: function (res) {
 
-              }
-            });
-
-          }
         }
-      })
+      });
     }, 300);
  
   },

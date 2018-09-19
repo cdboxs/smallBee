@@ -27,7 +27,7 @@
   <view class='mask' wx:if="{{showModal}}" bindtap='hidemask' style='height:{{screenHeight}}px;' catchtouchmove="myCatchTouch"></view>
 <form class='discussform' wx:if="{{showModal}}" bindsubmit="sendDiscuss">
   <text>发表评论</text>
-  <textarea type="text" name="discussInfo" data-name="discussInfo" value='{{discussInfo}}' placeholder='请发表您的评价' adjust-position="true" cursor-spacing="1000px" bindinput='checkDisInfo'></textarea>
+  <textarea type="text" name="discussInfo" data-name="discussInfo" value='{{discussInfo}}' placeholder='请发表您的评价' adjust-position="true" cursor-spacing="100" fixed="true" bindinput='checkDisInfo'></textarea>
   <button form-type='submit'>提交</button>
 </form>
 <view style="display:{{discussStust}};">

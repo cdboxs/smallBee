@@ -1,21 +1,19 @@
 <!--pages/mymerchant/index.wxml我的店铺-->
 <import src="../wxParse/wxParse.wxml" />
 <view class='demandMenu'>
-  <text bindtap='menuS' data-id="1" class="{{selected==1?'active':''}}">我的店铺</text>
-  <text bindtap='menuS' data-id="2" class="{{selected==2?'active':''}}">发布店铺</text>
+  <text bindtap='menuS' data-id="1" class="{{selected==1?'active':''}}">我的发布</text>
+  <text bindtap='menuS' data-id="2" class="{{selected==2?'active':''}}">入驻店铺</text>
 </view>
 <view class='productList mtop' wx:if="{{selected==1}}">
   <view wx:if="{{noData}}" class='ynData'>o(╥﹏╥)o暂无数据</view>
   <block wx:for="{{myMerchantList}}" wx:key="key">
-    <view class='product' bindtap='merchantInfo' data-shopid='{{item.id}}'>
-      <view class='plp'>
+    <view class='product' >
+      <view class='plp' bindtap='merchantInfo' data-shopid='{{item.id}}'>
         <image lazy-load="true" wx:if="{{item.logo}}" src='{{APIURL}}/upload/shop/{{item.logo}}' mode="widthFix"style='width:100%;height:100%;'></image>
         <image lazy-load="true" wx:else src='../img/nopicsmall-list.jpg' mode="aspectFit" style='width:94px;height:57px;'></image>
       </view>
-      <view class='pinfo' style='height:135rpx;'>
+      <view class='pinfo' style='height:135rpx;' bindtap='merchantInfo' data-shopid='{{item.id}}'>
         <text class='title'>{{item.description}}</text>
-      
-       
       </view>
       <view class='operation'>
         
@@ -33,7 +31,7 @@
 
 
 <form bindsubmit='checkInF' class='checkInF' wx:if="{{selected==2}}">
-  <!-- <view>
+  <view style='display:none;'>
     <label>所在城市：</label>
     <input wx:if="{{indexShowCity==0&&district==''}}" type='text' name="shopCity" disabled="true" value='{{cityName}}'></input>
     <input wx:if="{{indexShowCity==0&&cityName&&district}}" type='text' name="shopCity" disabled="true" value='{{cityName}}-{{district}}'></input>
@@ -42,7 +40,7 @@
 
     <input type='text' name="shopCityID" style='display:none;' value='{{cityID}}'></input>
   </view>
-  <view>
+   <!--<view>
     <label>商店名称：</label>
     <input type='text' name="shopName" placeholder='请输入商家名称（必填）' placeholder-class='plh'></input>
     <label class='tipx'>*</label>
@@ -86,7 +84,7 @@
   </view> -->
   <view>
     <label>店铺介绍：</label>
-    <textarea name="shopJJ" vlaue="{{checkIninfos?checkIninfos:''}}" bindtap='autoKeep' placeholder='请输入店铺介绍' placeholder-class='plh'maxlength="1500"></textarea>
+    <textarea name="shopJJ" value="{{checkIninfos ? checkIninfos : ''}}" bindinput='autoKeep' placeholder='请输入店铺介绍' placeholder-class='plh'maxlength="1500"></textarea>
      <view class='picAdd'>
       <input type='hidden' name="shopics" style='display:none;' value='{{shopPicArr}}' maxlength='500'></input>
       <block wx:for="{{shopListPic.bannerInfo}}" wx:key="key">

@@ -24,7 +24,11 @@ Page({
     noData: false,
     yesData: true,
   },
-
+  //更新name
+  changeData: function (names) {
+    var that=this;
+    that.getIndexShopList();
+  },
   //事件处理函数
   goCity: function (e) {
     let that=this;
@@ -55,33 +59,8 @@ Page({
       url: '../adInfo/index?id=' + e.currentTarget.dataset.id,
     })
   },
-  switchClick:function(e){
-    var that=this;
-    that.setData({
-      currentTab: e.currentTarget.dataset.currenttab
-    });
-   
-  },
-  switchToch:function(e){
-    var that = this;
-    wx.pageScrollTo({
-      scrollTop: 0,
-   
-    })
-    that.setData({
-      currentTab: e.detail.current
-    });
-    setTimeout(()=>{
-      if (e.detail.current == 0) {
-        that.getIndexShopList(that.data.page);
-      } else if (e.detail.current == 1) {
-        that.getIndexActivityList();
-      }
-    },200);
-   
-   
-    
-  },
+
+
   /**
      * 生命周期函数--监听页面加载
      */
@@ -89,18 +68,17 @@ Page({
   onLoad: function (options) {
     let that = this; 
     wx.removeStorageSync('cityInfo');
-    setTimeout(()=>{
-      that.data.indexpage = 1;
-      that.getIndexShopList();
-    },1000);
-   
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function (e) {
     let that = this;
-   
+    let cityInfo = wx.getStorageSync('cityInfo');
+    if (e || cityInfo.cityID){
+      setTimeout(() => { that.getIndexShopList(); }, 1000);
+    }
+    
   },
 
   /**
@@ -281,6 +259,7 @@ Page({
                       district: getCityInfo.district
                     });
                     that.getIndexData();
+                    that.getIndexShopList()
                   }
                 }
               }
@@ -310,6 +289,7 @@ Page({
                     district: getCityInfo.district
                   });
                  that.getIndexData();
+                  that.getIndexShopList()
                 }
               }
             } else if(e.data.code==0){
@@ -388,91 +368,94 @@ Page({
   getIndexData: function () {
     let that = this;
     let cityInfo = wx.getStorageSync('cityInfo');
-    //获取分类
-    wx.request({
-      url: app.globalData.APIURL + '/api/shop/classList',
-      method: 'GET',
-      dataType: 'json',
-      success: function (e) {
-        let classifyStart = [];
-        let classifyEnd = [];
-        for (var i = 0; i < e.data.data.length; i++) {
-          if (i <= 9) {
-            classifyStart.push(e.data.data[i]);
-          } else if (i > 9) {
-            classifyEnd.push(e.data.data[i]);
-          }
-        }
-        that.setData({
-          classifyStart: classifyStart,
-          classifyEnd: classifyEnd
-        });
-
-      },
-      fail: function (e) {
-        wx.stopPullDownRefresh();
-        wx.showToast({
-          title: '数据请求失败,请检测网络',
-          mask: true,
-          icon: 'none'
-        });
-      }
-    });
-    //获取公告数据
-   
-    wx.request({
-      url: app.globalData.APIURL + '/api/notice/index',
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      data: {
-        area_id: cityInfo.cityID
-      },
-      success: function (e) {
-        if(e.data.code==1){
-          that.setData({
-            Notice: e.data.data
-          });
-        } else if (e.data.code == 0){
-          that.setData({
-            notInfo: e.data.msg
-          });
-        }
-       
-      }
-    });
-    //获取首页广告
-    wx.request({
-      url: app.globalData.APIURL + '/api/ad/index',
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      data: {
-        area_id: cityInfo.cityID
-      },
-      success: function (e) {
-        if (e.data.code == 1) {
-          var adlist = [];
-          for (var i = 0; i <= 1; i++) {
-            if (e.data.data[i] != undefined) {
-              adlist.push(e.data.data[i]);
-            } else {
-              adlist[i] = { id: 0 }
+    if (cityInfo){
+      //获取分类
+      wx.request({
+        url: app.globalData.APIURL + '/api/shop/classList',
+        method: 'GET',
+        dataType: 'json',
+        success: function (e) {
+          let classifyStart = [];
+          let classifyEnd = [];
+          for (var i = 0; i < e.data.data.length; i++) {
+            if (i <= 9) {
+              classifyStart.push(e.data.data[i]);
+            } else if (i > 9) {
+              classifyEnd.push(e.data.data[i]);
             }
           }
           that.setData({
-            adlist: adlist,
-            adlistStatus: 1
+            classifyStart: classifyStart,
+            classifyEnd: classifyEnd
           });
-        } else if (e.data.code == 0) {
-          that.setData({
-            adlistStatus: 0
+
+        },
+        fail: function (e) {
+          wx.stopPullDownRefresh();
+          wx.showToast({
+            title: '数据请求失败,请检测网络',
+            mask: true,
+            icon: 'none'
           });
         }
-      }
-    });
+      });
+      //获取公告数据
+
+      wx.request({
+        url: app.globalData.APIURL + '/api/notice/index',
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          area_id: cityInfo.cityID
+        },
+        success: function (e) {    
+          if (e.data.code == 1) {
+            that.setData({
+              Notice: e.data.data.title
+            });
+          } else{
+            that.setData({
+              Notice: e.data.msg
+            });
+          }
+
+        }
+      });
+      //获取首页广告
+      wx.request({
+        url: app.globalData.APIURL + '/api/ad/index',
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          area_id: cityInfo.cityID
+        },
+        success: function (e) {
+          if (e.data.code == 1) {
+            var adlist = [];
+            for (var i = 0; i <= 1; i++) {
+              if (e.data.data[i] != undefined) {
+                adlist.push(e.data.data[i]);
+              } else {
+                adlist[i] = { id: 0 }
+              }
+            }
+            that.setData({
+              adlist: adlist,
+              adlistStatus: 1
+            });
+          } else if (e.data.code == 0) {
+            that.setData({
+              adlistStatus: 0
+            });
+          }
+        }
+      });
+    }
+
     wx.getStorage({
       key: 'cityInfo',
       success: function (res) {
@@ -512,6 +495,7 @@ Page({
         area_id: cityInfo.cityID
       },
       success: function (e) {
+        console.log(e);
         wx.hideLoading();
         if (e.data.code == 1) {
           for (let i = 0; i < e.data.data.length; i++) {
@@ -525,7 +509,7 @@ Page({
             noData: false,
             xqHeight: e.data.data.length * 95
           });
-
+        
         } else if (e.data.code == 0) {
           setTimeout(function () {
             that.setData({
